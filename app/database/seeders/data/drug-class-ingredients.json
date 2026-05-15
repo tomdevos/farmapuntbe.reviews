@@ -1,0 +1,1257 @@
+[
+  {
+    "drug_class": "ace-inhibitor",
+    "ingredient_slug": "captopril",
+    "ingredient_name": "captopril"
+  },
+  {
+    "drug_class": "ace-inhibitor",
+    "ingredient_slug": "enalapril",
+    "ingredient_name": "enalapril"
+  },
+  {
+    "drug_class": "ace-inhibitor",
+    "ingredient_slug": "fosinopril",
+    "ingredient_name": "fosinopril"
+  },
+  {
+    "drug_class": "ace-inhibitor",
+    "ingredient_slug": "lisinopril",
+    "ingredient_name": "lisinopril"
+  },
+  {
+    "drug_class": "ace-inhibitor",
+    "ingredient_slug": "perindopril",
+    "ingredient_name": "perindopril"
+  },
+  {
+    "drug_class": "ace-inhibitor",
+    "ingredient_slug": "quinapril",
+    "ingredient_name": "quinapril"
+  },
+  {
+    "drug_class": "ace-inhibitor",
+    "ingredient_slug": "ramipril",
+    "ingredient_name": "ramipril"
+  },
+  {
+    "drug_class": "ace-inhibitor",
+    "ingredient_slug": "trandolapril",
+    "ingredient_name": "trandolapril"
+  },
+  {
+    "drug_class": "antiaggregans",
+    "ingredient_slug": "acetylsalicylzuur",
+    "ingredient_name": "acetylsalicylzuur"
+  },
+  {
+    "drug_class": "antiaggregans",
+    "ingredient_slug": "clopidogrel",
+    "ingredient_name": "clopidogrel"
+  },
+  {
+    "drug_class": "antiaggregans",
+    "ingredient_slug": "dipyridamol",
+    "ingredient_name": "dipyridamol"
+  },
+  {
+    "drug_class": "antiaggregans",
+    "ingredient_slug": "prasugrel",
+    "ingredient_name": "prasugrel"
+  },
+  {
+    "drug_class": "antiaggregans",
+    "ingredient_slug": "ticagrelor",
+    "ingredient_name": "ticagrelor"
+  },
+  {
+    "drug_class": "antiaggregantia",
+    "ingredient_slug": "acetylsalicylzuur",
+    "ingredient_name": "acetylsalicylzuur"
+  },
+  {
+    "drug_class": "antiaggregantia",
+    "ingredient_slug": "clopidogrel",
+    "ingredient_name": "clopidogrel"
+  },
+  {
+    "drug_class": "antiaggregantia",
+    "ingredient_slug": "dipyridamol",
+    "ingredient_name": "dipyridamol"
+  },
+  {
+    "drug_class": "antiaggregantia",
+    "ingredient_slug": "prasugrel",
+    "ingredient_name": "prasugrel"
+  },
+  {
+    "drug_class": "antiaggregantia",
+    "ingredient_slug": "ticagrelor",
+    "ingredient_name": "ticagrelor"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "biperiden",
+    "ingredient_name": "biperiden"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "butylhyoscine",
+    "ingredient_name": "butylhyoscine"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "darifenacine",
+    "ingredient_name": "darifenacine"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "fesoterodine",
+    "ingredient_name": "fesoterodine"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "oxybutynine",
+    "ingredient_name": "oxybutynine"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "procyclidine",
+    "ingredient_name": "procyclidine"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "scopolamine",
+    "ingredient_name": "scopolamine"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "solifenacine",
+    "ingredient_name": "solifenacine"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "tolterodine",
+    "ingredient_name": "tolterodine"
+  },
+  {
+    "drug_class": "anticholinergicum",
+    "ingredient_slug": "trospium",
+    "ingredient_name": "trospium"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "acenocoumarol",
+    "ingredient_name": "acenocoumarol"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "apixaban",
+    "ingredient_name": "apixaban"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "dabigatran",
+    "ingredient_name": "dabigatran"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "dalteparine",
+    "ingredient_name": "dalteparine"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "edoxaban",
+    "ingredient_name": "edoxaban"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "enoxaparine",
+    "ingredient_name": "enoxaparine"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "fenprocoumon",
+    "ingredient_name": "fenprocoumon"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "fondaparinux",
+    "ingredient_name": "fondaparinux"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "nadroparine",
+    "ingredient_name": "nadroparine"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "rivaroxaban",
+    "ingredient_name": "rivaroxaban"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "tinzaparine",
+    "ingredient_name": "tinzaparine"
+  },
+  {
+    "drug_class": "anticoagulantia",
+    "ingredient_slug": "warfarine",
+    "ingredient_name": "warfarine"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "agomelatine",
+    "ingredient_name": "agomelatine"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "amitriptyline",
+    "ingredient_name": "amitriptyline"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "bupropion",
+    "ingredient_name": "bupropion"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "citalopram",
+    "ingredient_name": "citalopram"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "duloxetine",
+    "ingredient_name": "duloxetine"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "escitalopram",
+    "ingredient_name": "escitalopram"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "fluoxetine",
+    "ingredient_name": "fluoxetine"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "fluvoxamine",
+    "ingredient_name": "fluvoxamine"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "mirtazapine",
+    "ingredient_name": "mirtazapine"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "nortriptyline",
+    "ingredient_name": "nortriptyline"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "paroxetine",
+    "ingredient_name": "paroxetine"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "sertraline",
+    "ingredient_name": "sertraline"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "trazodon",
+    "ingredient_name": "trazodon"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "venlafaxine",
+    "ingredient_name": "venlafaxine"
+  },
+  {
+    "drug_class": "antidepressivum",
+    "ingredient_slug": "vortioxetine",
+    "ingredient_name": "vortioxetine"
+  },
+  {
+    "drug_class": "antihypertensiva",
+    "ingredient_slug": "clonidine",
+    "ingredient_name": "clonidine"
+  },
+  {
+    "drug_class": "antihypertensiva",
+    "ingredient_slug": "guanfacine",
+    "ingredient_name": "guanfacine"
+  },
+  {
+    "drug_class": "antihypertensiva",
+    "ingredient_slug": "methyldopa",
+    "ingredient_name": "methyldopa"
+  },
+  {
+    "drug_class": "antihypertensiva",
+    "ingredient_slug": "moxonidine",
+    "ingredient_name": "moxonidine"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "amisulpride",
+    "ingredient_name": "amisulpride"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "aripiprazol",
+    "ingredient_name": "aripiprazol"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "clozapine",
+    "ingredient_name": "clozapine"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "haloperidol",
+    "ingredient_name": "haloperidol"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "olanzapine",
+    "ingredient_name": "olanzapine"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "paliperidon",
+    "ingredient_name": "paliperidon"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "pipamperon",
+    "ingredient_name": "pipamperon"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "promazine",
+    "ingredient_name": "promazine"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "quetiapine",
+    "ingredient_name": "quetiapine"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "risperidon",
+    "ingredient_name": "risperidon"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "sulpiride",
+    "ingredient_name": "sulpiride"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "tiapride",
+    "ingredient_name": "tiapride"
+  },
+  {
+    "drug_class": "antipsychoticum",
+    "ingredient_slug": "zuclopenthixol",
+    "ingredient_name": "zuclopenthixol"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "alprazolam",
+    "ingredient_name": "alprazolam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "bromazepam",
+    "ingredient_name": "bromazepam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "clobazam",
+    "ingredient_name": "clobazam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "clonazepam",
+    "ingredient_name": "clonazepam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "diazepam",
+    "ingredient_name": "diazepam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "flurazepam",
+    "ingredient_name": "flurazepam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "lorazepam",
+    "ingredient_name": "lorazepam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "lormetazepam",
+    "ingredient_name": "lormetazepam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "midazolam",
+    "ingredient_name": "midazolam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "nitrazepam",
+    "ingredient_name": "nitrazepam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "oxazepam",
+    "ingredient_name": "oxazepam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "temazepam",
+    "ingredient_name": "temazepam"
+  },
+  {
+    "drug_class": "benzodiazepine",
+    "ingredient_slug": "triazolam",
+    "ingredient_name": "triazolam"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "atenolol",
+    "ingredient_name": "atenolol"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "bisoprolol",
+    "ingredient_name": "bisoprolol"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "carvedilol",
+    "ingredient_name": "carvedilol"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "esmolol",
+    "ingredient_name": "esmolol"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "labetalol",
+    "ingredient_name": "labetalol"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "metoprolol",
+    "ingredient_name": "metoprolol"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "nebivolol",
+    "ingredient_name": "nebivolol"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "propranolol",
+    "ingredient_name": "propranolol"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "sotalol",
+    "ingredient_name": "sotalol"
+  },
+  {
+    "drug_class": "betablokker",
+    "ingredient_slug": "timolol",
+    "ingredient_name": "timolol"
+  },
+  {
+    "drug_class": "bisfosfonaat",
+    "ingredient_slug": "alendronaat",
+    "ingredient_name": "alendronaat"
+  },
+  {
+    "drug_class": "bisfosfonaat",
+    "ingredient_slug": "etidronaat",
+    "ingredient_name": "etidronaat"
+  },
+  {
+    "drug_class": "bisfosfonaat",
+    "ingredient_slug": "ibandronaat",
+    "ingredient_name": "ibandronaat"
+  },
+  {
+    "drug_class": "bisfosfonaat",
+    "ingredient_slug": "pamidronaat",
+    "ingredient_name": "pamidronaat"
+  },
+  {
+    "drug_class": "bisfosfonaat",
+    "ingredient_slug": "risedronaat",
+    "ingredient_name": "risedronaat"
+  },
+  {
+    "drug_class": "bisfosfonaat",
+    "ingredient_slug": "zoledronaat",
+    "ingredient_name": "zoledronaat"
+  },
+  {
+    "drug_class": "calciumantagonist",
+    "ingredient_slug": "amlodipine",
+    "ingredient_name": "amlodipine"
+  },
+  {
+    "drug_class": "calciumantagonist",
+    "ingredient_slug": "diltiazem",
+    "ingredient_name": "diltiazem"
+  },
+  {
+    "drug_class": "calciumantagonist",
+    "ingredient_slug": "felodipine",
+    "ingredient_name": "felodipine"
+  },
+  {
+    "drug_class": "calciumantagonist",
+    "ingredient_slug": "lacidipine",
+    "ingredient_name": "lacidipine"
+  },
+  {
+    "drug_class": "calciumantagonist",
+    "ingredient_slug": "lercanidipine",
+    "ingredient_name": "lercanidipine"
+  },
+  {
+    "drug_class": "calciumantagonist",
+    "ingredient_slug": "nicardipine",
+    "ingredient_name": "nicardipine"
+  },
+  {
+    "drug_class": "calciumantagonist",
+    "ingredient_slug": "nifedipine",
+    "ingredient_name": "nifedipine"
+  },
+  {
+    "drug_class": "calciumantagonist",
+    "ingredient_slug": "nimodipine",
+    "ingredient_name": "nimodipine"
+  },
+  {
+    "drug_class": "calciumantagonist",
+    "ingredient_slug": "verapamil",
+    "ingredient_name": "verapamil"
+  },
+  {
+    "drug_class": "corticosteroïd",
+    "ingredient_slug": "betamethason",
+    "ingredient_name": "betamethason"
+  },
+  {
+    "drug_class": "corticosteroïd",
+    "ingredient_slug": "dexamethason",
+    "ingredient_name": "dexamethason"
+  },
+  {
+    "drug_class": "corticosteroïd",
+    "ingredient_slug": "hydrocortison",
+    "ingredient_name": "hydrocortison"
+  },
+  {
+    "drug_class": "corticosteroïd",
+    "ingredient_slug": "methylprednisolon",
+    "ingredient_name": "methylprednisolon"
+  },
+  {
+    "drug_class": "corticosteroïd",
+    "ingredient_slug": "prednisolon",
+    "ingredient_name": "prednisolon"
+  },
+  {
+    "drug_class": "corticosteroïd",
+    "ingredient_slug": "prednison",
+    "ingredient_name": "prednison"
+  },
+  {
+    "drug_class": "corticosteroïd",
+    "ingredient_slug": "triamcinolon",
+    "ingredient_name": "triamcinolon"
+  },
+  {
+    "drug_class": "corticosteroïden",
+    "ingredient_slug": "betamethason",
+    "ingredient_name": "betamethason"
+  },
+  {
+    "drug_class": "corticosteroïden",
+    "ingredient_slug": "dexamethason",
+    "ingredient_name": "dexamethason"
+  },
+  {
+    "drug_class": "corticosteroïden",
+    "ingredient_slug": "hydrocortison",
+    "ingredient_name": "hydrocortison"
+  },
+  {
+    "drug_class": "corticosteroïden",
+    "ingredient_slug": "methylprednisolon",
+    "ingredient_name": "methylprednisolon"
+  },
+  {
+    "drug_class": "corticosteroïden",
+    "ingredient_slug": "prednisolon",
+    "ingredient_name": "prednisolon"
+  },
+  {
+    "drug_class": "corticosteroïden",
+    "ingredient_slug": "prednison",
+    "ingredient_name": "prednison"
+  },
+  {
+    "drug_class": "corticosteroïden",
+    "ingredient_slug": "triamcinolon",
+    "ingredient_name": "triamcinolon"
+  },
+  {
+    "drug_class": "doac",
+    "ingredient_slug": "apixaban",
+    "ingredient_name": "apixaban"
+  },
+  {
+    "drug_class": "doac",
+    "ingredient_slug": "dabigatran",
+    "ingredient_name": "dabigatran"
+  },
+  {
+    "drug_class": "doac",
+    "ingredient_slug": "edoxaban",
+    "ingredient_name": "edoxaban"
+  },
+  {
+    "drug_class": "doac",
+    "ingredient_slug": "rivaroxaban",
+    "ingredient_name": "rivaroxaban"
+  },
+  {
+    "drug_class": "kaliumsparend diureticum",
+    "ingredient_slug": "amiloride",
+    "ingredient_name": "amiloride"
+  },
+  {
+    "drug_class": "kaliumsparend diureticum",
+    "ingredient_slug": "eplerenon",
+    "ingredient_name": "eplerenon"
+  },
+  {
+    "drug_class": "kaliumsparend diureticum",
+    "ingredient_slug": "spironolacton",
+    "ingredient_name": "spironolacton"
+  },
+  {
+    "drug_class": "kaliumsparend diureticum",
+    "ingredient_slug": "triamtereen",
+    "ingredient_name": "triamtereen"
+  },
+  {
+    "drug_class": "lisdiureticum",
+    "ingredient_slug": "bumetanide",
+    "ingredient_name": "bumetanide"
+  },
+  {
+    "drug_class": "lisdiureticum",
+    "ingredient_slug": "furosemide",
+    "ingredient_name": "furosemide"
+  },
+  {
+    "drug_class": "lisdiureticum",
+    "ingredient_slug": "torasemide",
+    "ingredient_name": "torasemide"
+  },
+  {
+    "drug_class": "macrolide",
+    "ingredient_slug": "azitromycine",
+    "ingredient_name": "azitromycine"
+  },
+  {
+    "drug_class": "macrolide",
+    "ingredient_slug": "claritromycine",
+    "ingredient_name": "claritromycine"
+  },
+  {
+    "drug_class": "macrolide",
+    "ingredient_slug": "erythromycine",
+    "ingredient_name": "erythromycine"
+  },
+  {
+    "drug_class": "macrolide",
+    "ingredient_slug": "roxitromycine",
+    "ingredient_name": "roxitromycine"
+  },
+  {
+    "drug_class": "niet-cardioselectieve betablokker",
+    "ingredient_slug": "carvedilol",
+    "ingredient_name": "carvedilol"
+  },
+  {
+    "drug_class": "niet-cardioselectieve betablokker",
+    "ingredient_slug": "labetalol",
+    "ingredient_name": "labetalol"
+  },
+  {
+    "drug_class": "niet-cardioselectieve betablokker",
+    "ingredient_slug": "propranolol",
+    "ingredient_name": "propranolol"
+  },
+  {
+    "drug_class": "niet-cardioselectieve betablokker",
+    "ingredient_slug": "sotalol",
+    "ingredient_name": "sotalol"
+  },
+  {
+    "drug_class": "niet-cardioselectieve betablokker",
+    "ingredient_slug": "timolol",
+    "ingredient_name": "timolol"
+  },
+  {
+    "drug_class": "niet-cardioselectieve β-blokker",
+    "ingredient_slug": "carvedilol",
+    "ingredient_name": "carvedilol"
+  },
+  {
+    "drug_class": "niet-cardioselectieve β-blokker",
+    "ingredient_slug": "labetalol",
+    "ingredient_name": "labetalol"
+  },
+  {
+    "drug_class": "niet-cardioselectieve β-blokker",
+    "ingredient_slug": "propranolol",
+    "ingredient_name": "propranolol"
+  },
+  {
+    "drug_class": "niet-cardioselectieve β-blokker",
+    "ingredient_slug": "sotalol",
+    "ingredient_name": "sotalol"
+  },
+  {
+    "drug_class": "niet-cardioselectieve β-blokker",
+    "ingredient_slug": "timolol",
+    "ingredient_name": "timolol"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "celecoxib",
+    "ingredient_name": "celecoxib"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "diclofenac",
+    "ingredient_name": "diclofenac"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "etoricoxib",
+    "ingredient_name": "etoricoxib"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "ibuprofen",
+    "ingredient_name": "ibuprofen"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "indometacine",
+    "ingredient_name": "indometacine"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "ketoprofen",
+    "ingredient_name": "ketoprofen"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "meloxicam",
+    "ingredient_name": "meloxicam"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "naproxen",
+    "ingredient_name": "naproxen"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "nimesulide",
+    "ingredient_name": "nimesulide"
+  },
+  {
+    "drug_class": "nsaid",
+    "ingredient_slug": "piroxicam",
+    "ingredient_name": "piroxicam"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "buprenorfine",
+    "ingredient_name": "buprenorfine"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "codeine",
+    "ingredient_name": "codeïne"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "fentanyl",
+    "ingredient_name": "fentanyl"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "hydromorfon",
+    "ingredient_name": "hydromorfon"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "methadon",
+    "ingredient_name": "methadon"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "morfine",
+    "ingredient_name": "morfine"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "oxycodon",
+    "ingredient_name": "oxycodon"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "pethidine",
+    "ingredient_name": "pethidine"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "tapentadol",
+    "ingredient_name": "tapentadol"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "tilidine",
+    "ingredient_name": "tilidine"
+  },
+  {
+    "drug_class": "opioïd",
+    "ingredient_slug": "tramadol",
+    "ingredient_name": "tramadol"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "buprenorfine",
+    "ingredient_name": "buprenorfine"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "codeine",
+    "ingredient_name": "codeïne"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "fentanyl",
+    "ingredient_name": "fentanyl"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "hydromorfon",
+    "ingredient_name": "hydromorfon"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "methadon",
+    "ingredient_name": "methadon"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "morfine",
+    "ingredient_name": "morfine"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "oxycodon",
+    "ingredient_name": "oxycodon"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "pethidine",
+    "ingredient_name": "pethidine"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "tapentadol",
+    "ingredient_name": "tapentadol"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "tilidine",
+    "ingredient_name": "tilidine"
+  },
+  {
+    "drug_class": "opioïden",
+    "ingredient_slug": "tramadol",
+    "ingredient_name": "tramadol"
+  },
+  {
+    "drug_class": "ppi",
+    "ingredient_slug": "esomeprazol",
+    "ingredient_name": "esomeprazol"
+  },
+  {
+    "drug_class": "ppi",
+    "ingredient_slug": "lansoprazol",
+    "ingredient_name": "lansoprazol"
+  },
+  {
+    "drug_class": "ppi",
+    "ingredient_slug": "omeprazol",
+    "ingredient_name": "omeprazol"
+  },
+  {
+    "drug_class": "ppi",
+    "ingredient_slug": "pantoprazol",
+    "ingredient_name": "pantoprazol"
+  },
+  {
+    "drug_class": "ppi",
+    "ingredient_slug": "rabeprazol",
+    "ingredient_name": "rabeprazol"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "azilsartan",
+    "ingredient_name": "azilsartan"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "candesartan",
+    "ingredient_name": "candesartan"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "captopril",
+    "ingredient_name": "captopril"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "enalapril",
+    "ingredient_name": "enalapril"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "eprosartan",
+    "ingredient_name": "eprosartan"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "fosinopril",
+    "ingredient_name": "fosinopril"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "irbesartan",
+    "ingredient_name": "irbesartan"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "lisinopril",
+    "ingredient_name": "lisinopril"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "losartan",
+    "ingredient_name": "losartan"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "olmesartan",
+    "ingredient_name": "olmesartan"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "perindopril",
+    "ingredient_name": "perindopril"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "quinapril",
+    "ingredient_name": "quinapril"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "ramipril",
+    "ingredient_name": "ramipril"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "telmisartan",
+    "ingredient_name": "telmisartan"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "trandolapril",
+    "ingredient_name": "trandolapril"
+  },
+  {
+    "drug_class": "raas-inhibitor",
+    "ingredient_slug": "valsartan",
+    "ingredient_name": "valsartan"
+  },
+  {
+    "drug_class": "sartaan",
+    "ingredient_slug": "azilsartan",
+    "ingredient_name": "azilsartan"
+  },
+  {
+    "drug_class": "sartaan",
+    "ingredient_slug": "candesartan",
+    "ingredient_name": "candesartan"
+  },
+  {
+    "drug_class": "sartaan",
+    "ingredient_slug": "eprosartan",
+    "ingredient_name": "eprosartan"
+  },
+  {
+    "drug_class": "sartaan",
+    "ingredient_slug": "irbesartan",
+    "ingredient_name": "irbesartan"
+  },
+  {
+    "drug_class": "sartaan",
+    "ingredient_slug": "losartan",
+    "ingredient_name": "losartan"
+  },
+  {
+    "drug_class": "sartaan",
+    "ingredient_slug": "olmesartan",
+    "ingredient_name": "olmesartan"
+  },
+  {
+    "drug_class": "sartaan",
+    "ingredient_slug": "telmisartan",
+    "ingredient_name": "telmisartan"
+  },
+  {
+    "drug_class": "sartaan",
+    "ingredient_slug": "valsartan",
+    "ingredient_name": "valsartan"
+  },
+  {
+    "drug_class": "ssri",
+    "ingredient_slug": "citalopram",
+    "ingredient_name": "citalopram"
+  },
+  {
+    "drug_class": "ssri",
+    "ingredient_slug": "escitalopram",
+    "ingredient_name": "escitalopram"
+  },
+  {
+    "drug_class": "ssri",
+    "ingredient_slug": "fluoxetine",
+    "ingredient_name": "fluoxetine"
+  },
+  {
+    "drug_class": "ssri",
+    "ingredient_slug": "fluvoxamine",
+    "ingredient_name": "fluvoxamine"
+  },
+  {
+    "drug_class": "ssri",
+    "ingredient_slug": "paroxetine",
+    "ingredient_name": "paroxetine"
+  },
+  {
+    "drug_class": "ssri",
+    "ingredient_slug": "sertraline",
+    "ingredient_name": "sertraline"
+  },
+  {
+    "drug_class": "statine",
+    "ingredient_slug": "atorvastatine",
+    "ingredient_name": "atorvastatine"
+  },
+  {
+    "drug_class": "statine",
+    "ingredient_slug": "fluvastatine",
+    "ingredient_name": "fluvastatine"
+  },
+  {
+    "drug_class": "statine",
+    "ingredient_slug": "pravastatine",
+    "ingredient_name": "pravastatine"
+  },
+  {
+    "drug_class": "statine",
+    "ingredient_slug": "rosuvastatine",
+    "ingredient_name": "rosuvastatine"
+  },
+  {
+    "drug_class": "statine",
+    "ingredient_slug": "simvastatine",
+    "ingredient_name": "simvastatine"
+  },
+  {
+    "drug_class": "tca",
+    "ingredient_slug": "amitriptyline",
+    "ingredient_name": "amitriptyline"
+  },
+  {
+    "drug_class": "tca",
+    "ingredient_slug": "clomipramine",
+    "ingredient_name": "clomipramine"
+  },
+  {
+    "drug_class": "tca",
+    "ingredient_slug": "doxepine",
+    "ingredient_name": "doxepine"
+  },
+  {
+    "drug_class": "tca",
+    "ingredient_slug": "imipramine",
+    "ingredient_name": "imipramine"
+  },
+  {
+    "drug_class": "tca",
+    "ingredient_slug": "maprotiline",
+    "ingredient_name": "maprotiline"
+  },
+  {
+    "drug_class": "tca",
+    "ingredient_slug": "nortriptyline",
+    "ingredient_name": "nortriptyline"
+  },
+  {
+    "drug_class": "thiazide",
+    "ingredient_slug": "bendroflumethiazide",
+    "ingredient_name": "bendroflumethiazide"
+  },
+  {
+    "drug_class": "thiazide",
+    "ingredient_slug": "chloortalidon",
+    "ingredient_name": "chloortalidon"
+  },
+  {
+    "drug_class": "thiazide",
+    "ingredient_slug": "hydrochloorthiazide",
+    "ingredient_name": "hydrochloorthiazide"
+  },
+  {
+    "drug_class": "thiazide",
+    "ingredient_slug": "indapamide",
+    "ingredient_name": "indapamide"
+  },
+  {
+    "drug_class": "thiazide",
+    "ingredient_slug": "metolazon",
+    "ingredient_name": "metolazon"
+  },
+  {
+    "drug_class": "tricyclisch antidepressivum",
+    "ingredient_slug": "amitriptyline",
+    "ingredient_name": "amitriptyline"
+  },
+  {
+    "drug_class": "tricyclisch antidepressivum",
+    "ingredient_slug": "clomipramine",
+    "ingredient_name": "clomipramine"
+  },
+  {
+    "drug_class": "tricyclisch antidepressivum",
+    "ingredient_slug": "doxepine",
+    "ingredient_name": "doxepine"
+  },
+  {
+    "drug_class": "tricyclisch antidepressivum",
+    "ingredient_slug": "imipramine",
+    "ingredient_name": "imipramine"
+  },
+  {
+    "drug_class": "tricyclisch antidepressivum",
+    "ingredient_slug": "maprotiline",
+    "ingredient_name": "maprotiline"
+  },
+  {
+    "drug_class": "tricyclisch antidepressivum",
+    "ingredient_slug": "nortriptyline",
+    "ingredient_name": "nortriptyline"
+  },
+  {
+    "drug_class": "z-medicatie",
+    "ingredient_slug": "zaleplon",
+    "ingredient_name": "zaleplon"
+  },
+  {
+    "drug_class": "z-medicatie",
+    "ingredient_slug": "zolpidem",
+    "ingredient_name": "zolpidem"
+  },
+  {
+    "drug_class": "z-medicatie",
+    "ingredient_slug": "zopiclon",
+    "ingredient_name": "zopiclon"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "atenolol",
+    "ingredient_name": "atenolol"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "bisoprolol",
+    "ingredient_name": "bisoprolol"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "carvedilol",
+    "ingredient_name": "carvedilol"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "esmolol",
+    "ingredient_name": "esmolol"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "labetalol",
+    "ingredient_name": "labetalol"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "metoprolol",
+    "ingredient_name": "metoprolol"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "nebivolol",
+    "ingredient_name": "nebivolol"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "propranolol",
+    "ingredient_name": "propranolol"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "sotalol",
+    "ingredient_name": "sotalol"
+  },
+  {
+    "drug_class": "β-blokker",
+    "ingredient_slug": "timolol",
+    "ingredient_name": "timolol"
+  }
+]

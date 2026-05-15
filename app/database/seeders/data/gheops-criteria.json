@@ -1,0 +1,707 @@
+[
+  {
+    "list_num": 1,
+    "nr": "1",
+    "title": "Centraal werkende antihypertensiva (bv. clonidine, guanfacine, methyldopa, moxonidine)",
+    "comorbiditeit": null,
+    "rationale": "Hoog risico op ongewenste effecten op het centraal zenuwstelsel; Kan bradycardie en orthostatische hypotensie veroorzaken; Niet aanbevolen als routinebehandeling voor hypertensie",
+    "alternatief": "Overweeg andere veiligere antihypertensiva, tenzij duidelijke intolerantie of gebrek aan werkzaamheid met andere klassen van antihypertensiva",
+    "ingredient_slugs": [
+      "moxonidine"
+    ],
+    "drug_classes": [
+      "antihypertensiva"
+    ]
+  },
+  {
+    "list_num": 1,
+    "nr": "10",
+    "title": "Theofylline",
+    "comorbiditeit": null,
+    "rationale": "Veiliger alternatief beschikbaar; Risico op ongewenste effecten door smalle therapeutische index; Twijfelachtige evidentie",
+    "alternatief": "Evalueer opnieuw en overweeg een veiliger alternatief volgens de Global Initiative for Asthma (GINA) of Global Initiative for Chronic Obstructive Lung Disease (GOLD) richtlijnen",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "11",
+    "title": "Narcotische antitussiva (bv. codeïne, ethylmorfine, dihydrocodeïne,",
+    "comorbiditeit": null,
+    "rationale": "Beperkte evidentie; Oudere personen zijn gevoeliger voor ongewenste effecten (bv. constipatie en sedatie)",
+    "alternatief": "Overweeg een niet-farmacologische aanpak en/of een veiliger alternatief GheOP3S-tool",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "12",
+    "title": "Langwerkende",
+    "comorbiditeit": null,
+    "rationale": "er op een ander antidiabeticum (bv. metformine of een ander sulfonylureumderivaat (gliclazide, sulfonylureumderivaten (bv. gliquidon)) glibenclamide, glimepiride)",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "13",
+    "title": "Desmopressine",
+    "comorbiditeit": null,
+    "rationale": "Vermijd desmopressine voor de behandeling van nycturie of nachtelijke polyurie: hoog risico op hyponatriëmie en duizeligheid",
+    "alternatief": "1. Ga mogelijke geneesmiddelgerelateerde oorzaak na 2. Overweeg om therapie te stoppen en over te schakelen naar een niet-farmacologische aanpak",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "14",
+    "title": "Opioïden Verhoogd risico op ongewenste effecten bij oudere personen (bv. 1. Ga n",
+    "comorbiditeit": null,
+    "rationale": "a of veiligere opties gebruikt werden: niet-farmacologische aanpak, max. dosis paracetamol, kortdurend ongewenste effecten van het centraal zenuwstelsel zoals verwardheid, gebruik van een topisch of systemisch NSAID met/zonder een PPI delirium, nausea, constipatie, vallen) en risico op 2. Als opioïd nodig is: vermijd vaste combinaties met codeïne of tramadol en begin met de laagst mogelijke dosis afhankelijkheid/tolerantie; Metabolisatie van codeïne/tramadol hangt van het opioïd met onmiddellijke afgifte (\"Start low - go slow”) af van het CYP2D6-genotype, wat kan leiden tot verschillende klinische 3. Overweeg om door te gaan met niet-opioïde analgetica (bv. max. dosis paracetamol) responsen; Beperkte effecten op lange termijn; 4. Beperk de gebruiksduur en overweeg om osmotisch laxativum toe te voegen (zie criterium ‘Opioïd zonder Specifiek voor tramadol: Verhoogd risico op hypoglykemie, laxativum’) serotoninesyndroom als gevolg van geneesmiddelinteracties, kan 5. Ga na of er andere valrisicoverhogende geneesmiddelen (zie tabel B) zijn en evalueer regelmatig hyponatriëmie verergeren of veroorzaken; Voor combinatie van paracetamol met codeïne of tramadol: dosisaanpassing van individuele geneesmiddelen is niet mogelijk, verschillende farmacokinetische eigenschappen van beide geneesmiddelen",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "opioïden"
+    ]
+  },
+  {
+    "list_num": 1,
+    "nr": "15",
+    "title": "Systemische* NSAID’s",
+    "comorbiditeit": null,
+    "rationale": "Verhoogd risico op gastro-intestinale ongewenste effecten (bv.ulcus, bloeding, perforatie) bij hoogrisicogroepen (bv. > jaar of bij gebruik van systemische corticosteroïden, anticoagulantia of antiaggregantia); Verhoogd cardiovasculair risico (bv. verhoogde bloeddruk, hartfalen, myocardinfarct en cerebrovasculaire accidenten); Verhoogd risico op nierschade",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Overweeg om over te schakelen op paracetamol en/of topisch NSAID 3. Als systemisch NSAID (keuze afhankelijk van de patiëntkarakteristieken, bv. cardiovasculaire en gastro-intestinale risico's) nodig is, verkies de laagst mogelijke dosis en beperk de gebruiksduur 4. Voeg een PPI toe in standaarddosis bij patiënten met verhoogd gastro-intestinaal risico 5. Adviseer om de nierfunctie en/of bloeddruk op te volgen, afhankelijk van de diagnose",
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "NSAID"
+    ]
+  },
+  {
+    "list_num": 1,
+    "nr": "16",
+    "title": "Bisfosfonaten > jaar Fractuurpreventie bij",
+    "comorbiditeit": null,
+    "rationale": "is niet 1. Overweeg om de therapie te stoppen bewezen, met toenemende risico's op zeldzame ongewenste effecten 2. Bespreek de niet-farmacologische aanpak om het risico op vallen en fracturen te verminderen (osteonecrose van de kaak en atypische femurfracturen)",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "17",
+    "title": "Benzodiazepines of Z- geneesmiddelen (zolpidem, zopiclon)",
+    "comorbiditeit": null,
+    "rationale": "Bij oudere personen verhogen benzodiazepines/Z-geneesmiddelen het risico op overdreven sedatie, verwardheid, verminderde cognitie, delirium, vallen, fracturen en ongevallen",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie geleidelijk 2. In geval van slapeloosheid: ga na of er mogelijke slaapverstorende medicatie gebruikt wordt 3. Als therapie nodig is: overweeg een niet-farmacologische aanpak met een afbouwplan om te stoppen of om de dosis te reduceren tot de laagst mogelijke dosis en/of schakel over naar een veiliger alternatief",
+    "ingredient_slugs": [
+      "zolpidem-hemitartraat",
+      "zopiclon"
+    ],
+    "drug_classes": [
+      "benzodiazepine"
+    ]
+  },
+  {
+    "list_num": 1,
+    "nr": "18",
+    "title": "Antipsychotica > maand",
+    "comorbiditeit": null,
+    "rationale": "rge en 1. Vermijd antipsychotica voor gedrags- en psychologische symptomen bij dementie (BPSD), tenzij niet- metabole effecten, Parkinsonisme); Verhoogd risico op cerebrovasculair farmacologische opties gefaald hebben of niet mogelijk zijn en wanneer de patiënt zichzelf of anderen schade accident, cognitieve achteruitgang en mortaliteit bij patiënten met dreigt te berokkenen, zo niet: stop de therapie geleidelijk dementie 2. Als therapie nodig is: ga mogelijke oorzaken van BPSD na (bv. pijn, urineweginfectie, constipatie) en overweeg een niet- farmacologische aanpak 3. Overweeg de laagst mogelijke dosis van het antipsychoticum en beperk de gebruiksduur",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "19",
+    "title": "Antidepressiva > jaar",
+    "comorbiditeit": null,
+    "rationale": "Mogelijke anticholinerge en sedatieve effecten (vooral bij tricyclische antidepressiva); Kunnen orthostatische hypotensie veroorzaken",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie geleidelijk 2. Indien therapie nodig is: overweeg een niet-farmacologische aanpak en/of een minder anticholinerg/sederend alternatief",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "2",
+    "title": "Digoxine > 0,125 mg/dag",
+    "comorbiditeit": null,
+    "rationale": "Ongunstige risico/batenverhouding (veiligere alternatieven beschikbaar); Risico op overdosering bij nierinsufficiëntie: nausea, braken, slaperigheid, gezichtsstoornissen, hartritmestoornissen",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Indien therapie nodig is: verlaag de dosis van digoxine tot ≤ 0,125 mg/dag en adviseer om de digoxineserumspiegel te controleren",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "20",
+    "title": "Barbituraten (bv. fenobarbital, Hoge mate van fysieke afhankelijkheid, toleranti",
+    "comorbiditeit": null,
+    "rationale": "e voor slaapvoordelen, Overweeg een veiliger alternatief (tenzij gebruikt voor epilepsie in gespecialiseerde zorg), afhankelijk van de primidon) Vele interacties mogelijk indicatie. Bij stoppen: therapie gradueel en langzaam afbouwen.",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "21",
+    "title": "Nitrofurantoïne > maanden",
+    "comorbiditeit": null,
+    "rationale": "Mogelijke pulmonale toxiciteit, hepatotoxiciteit en perifere neuropathie, vooral bij langdurig gebruik; Veiligere alternatieven beschikbaar; Profylactische (dagelijkse) antibioticatherapie voor terugkerende lage urineweginfecties wordt niet aanbevolen, vooral niet",
+    "alternatief": "1. Stop de therapie: profylactische (dagelijkse) antibioticatherapie bij terugkerende lage urineweginfecties wordt niet aanbevolen, vooral niet met nitrofurantoïne bij oudere personen met nierinsufficiëntie 2. Als therapie nodig is: overweeg een niet-farmacologische aanpak",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "22",
+    "title": "Sederende antihistaminica (bv. Sterk anticholinerge effecten met o.a.",
+    "comorbiditeit": null,
+    "rationale": "sedatie.; Klaring is 1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie chloorfenamine = gereduceerd bij oudere leeftijd; Tolerantie ontwikkelt zich bij gebruik als 2. Verkies overschakelen naar lokale therapie of naar een minder sederend antihistaminicum (bv. bilastine, chloorfeniramine, cinnarizine, hypnoticum (levo)cetirizine, (des)loratadine, ebastine, fexofenadine, mizolastine, rupatadine) difenhydramine, dimenhydrinaat, dimetindeen, doxylamine, feniramine, hydroxyzine, ketotifen, meclozine)",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "23",
+    "title": "Oraal elementair ijzer > 200 mg/dag",
+    "comorbiditeit": null,
+    "rationale": "Geen bewijs van verhoogde ijzerabsorptie boven deze doses; Verhoogd risico op gastro-intestinale ongewenste effecten",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Als therapie nodig is: verkies elementair ijzer < 200 mg/dag (of volgens nationale richtlijnen) in een vorm met onmiddellijke afgifte. Om gastro-intestinale problemen te vermijden: start met de laagst mogelijke dosis en verhoog de dosis indien nodig op basis van gastro-intestinale tolerantie. Overweeg een dosering om de andere dag in geval van gastro-intestinale problemen",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "24",
+    "title": "Orale decongestive (bv.",
+    "comorbiditeit": null,
+    "rationale": "tmieën, Stop de therapie en verkies intranasale therapie (hypertone zoutoplossing, vasoconstrictor < dagen of fenylefrine, pseudo-efedrine) convulsies, psychosen, hallucinaties, slapeloosheid, urineretentie corticosteroïd)",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "25",
+    "title": "Intranasale decongestiva > dagen",
+    "comorbiditeit": null,
+    "rationale": "Risico op rebound neuscongestie (rhinitis medicamentosa), verhoogde bloeddruk",
+    "alternatief": "Stop de therapie en verkies een hypertone zoutoplossing en/of intranasale corticosteroïden",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "3",
+    "title": "Acetylsalicylzuur > 100 mg/dag",
+    "comorbiditeit": null,
+    "rationale": "Geen bewijs voor verhoogde werkzaamheid; Verhoogd risico op bloedingen en gastro-intestinale ongewenste effecten (bv. ulcus, bloeding, perforatie) bij hoogrisicogroepen (bv. > jaar of bij gebruik van systemische corticosteroïden, anticoagulantia of antiaggregantia)",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Voor gebruik als antiaggregans: verlaag dosis tot 75-100 mg/dag Voor gebruik bij koorts of pijn: verkies paracetamol Voor gebruik bij ontsteking: verkies topisch NSAID of oraal NSAID in de laagst mogelijke dosis met/zonder een PPI en beperk de gebruiksduur (zie criterium 'Systemische NSAID's')",
+    "ingredient_slugs": [
+      "acetylsalicylzuur"
+    ],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "4",
+    "title": "Dipyridamol",
+    "comorbiditeit": null,
+    "rationale": "Veiligere alternatieven beschikbaar (meer bewijs voor acetylsalicylzuur); Risico op vasodilatatie met hoofdpijn, warmte-opwellingen en hypotensie",
+    "alternatief": "Vervang dipyridamol door acetylsalicylzuur in een lage dosis (75-100 mg/dag) of een ander antitrombotisch geneesmiddel volgens de indicatie",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "5",
+    "title": "PPI’s > weken",
+    "comorbiditeit": null,
+    "rationale": "Potentieel verhoogd risico op ongewenste effecten: pneumonie, vitamine B12-tekort, hypomagnesiëmie, fracturen, gastro-intestinale infecties, nierlijden",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie geleidelijk 2. Als therapie nodig is: identificeer de mogelijke geneesmiddelgerelateerde oorzaak en overweeg om de oorzakelijke medicatie te stoppen of de dosis ervan te verlagen 3. Overweeg een niet-farmacologische aanpak met een afbouwplan om te stoppen of om de dosis te verlagen tot de laagst mogelijke dosis",
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "PPI"
+    ]
+  },
+  {
+    "list_num": 1,
+    "nr": "6",
+    "title": "Alizapride",
+    "comorbiditeit": null,
+    "rationale": "Kan slaperigheid en extrapiramidale effecten veroorzaken zoals Parkinsonisme en tardieve dyskinesie; Het risico kan hoger zijn bij kwetsbare oudere personen en bij langdurige blootstelling",
+    "alternatief": "1. Evalueer opnieuw de indicatie. Indien niet gebruikt voor nausea/braken veroorzaakt door anesthesie/chirurgische ingreep of chemotherapie/radiotherapie: stop de therapie 2. Als therapie nodig is: identificeer mogelijke (geneesmiddelgerelateerde) oorzaak en overweeg om de oorzakelijke medicatie te stoppen of de dosis ervan te verlagen 3. Bespreek de niet-farmacologische aanpak en schakel over naar een veiliger alternatief (bv. domperidon in de laagst mogelijke dosis gedurende max. dagen)",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "7",
+    "title": "Metoclopramide",
+    "comorbiditeit": null,
+    "rationale": "Kan slaperigheid en extrapiramidale effecten veroorzaken zoals Parkinsonisme en tardieve dyskinesie; Het risico kan hoger zijn bij kwetsbare oudere personen en bij langdurige blootstelling",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Als therapie nodig is: identificeer mogelijke (geneesmiddelgerelateerde) oorzaak en overweeg om de oorzakelijke medicatie te stoppen of de dosis ervan te verlagen 3. Bespreek de niet-farmacologische aanpak en schakel over naar een veiliger alternatief (bv. domperidon in de laagst mogelijke dosis gedurende max. dagen) of verlaag de dosis van metoclopramide tot x mg/dag en gebruik voor max. dagen",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "8",
+    "title": "Vloeibare paraffine",
+    "comorbiditeit": null,
+    "rationale": "Kan leiden tot hypocalciëmie en hypokaliëmie, kan bij aspiratie leiden tot lipoïdpneumonie",
+    "alternatief": "1. Stop de therapie 2. In geval van constipatie: identificeer mogelijke geneesmiddelgerelateerde oorzaak van constipatie en overweeg om de oorzakelijke medicatie te stoppen of de dosis ervan te verlagen 3. Bespreek de niet-farmacologische aanpak (bv. levensstijlaanpassingen) en/of stel een osmotisch laxativum voor",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 1,
+    "nr": "9",
+    "title": "Contactlaxativa (bv. bisacodyl, picosulfaat, senna) voor dagelijks gebruik > weken",
+    "comorbiditeit": null,
+    "rationale": "Verhoogd risico op ongewenste effecten (nausea, buikkrampen, elektrolytstoornissen, achteruitgang nierfunctie, diarree met risico op uitdroging) bij chronisch gebruik bij oudere personen; De veiligheid op lange termijn bij oudere personen is niet gekend",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Als therapie nodig is: identificeer de mogelijke geneesmiddelgerelateerde oorzaak van constipatie en overweeg om de oorzakelijke medicatie te stoppen of de dosis ervan te verlagen 3. Bespreek de niet-farmacologische aanpak (bv. levensstijlaanpassingen) en/of stel een osmotisch laxativum voor",
+    "ingredient_slugs": [
+      "picosulfaat-natrium"
+    ],
+    "drug_classes": []
+  },
+  {
+    "list_num": 2,
+    "nr": "26",
+    "title": "Thiaziden en lisdiuretica",
+    "comorbiditeit": "Regelmatige jichtaanvallen",
+    "rationale": "Kunnen jicht verergeren of sneller doen ontstaan",
+    "alternatief": "1. Als diureticum nodig is: overweeg een dosisverlaging van het thiazide/lisdiureticum en (alleen indien nodig) overweeg om een kaliumsparend diureticum of een RAAS-inhibitor toe te voegen 2. Indien niet mogelijk: start met urinezuurverlagende medicatie, met voortzetten van het oorspronkelijke diureticum. Zorg voor voldoende hydratatie en volg de urinezuurspiegels op 3. Enkel in geval van aanhoudende jichtaanvallen: verkies een andere geschikte geneesmiddelklasse (bv. dihydropyridine calciumantagonist of RAAS-inhibitor)",
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "thiazide"
+    ]
+  },
+  {
+    "list_num": 2,
+    "nr": "27",
+    "title": "Niet-cardioselectieve β-blokkers (bv. carvedilol, labetalol, propranolol, timolol in oogdruppels)",
+    "comorbiditeit": "Astma of COPD",
+    "rationale": "Kunnen astma/COPD verergeren",
+    "alternatief": "Overweeg een cardioselectieve β-blokker (bv. acebutolol, atenolol, betaxolol, bisoprolol, celiprolol, metoprolol, nebivolol) in de laagst mogelijke dosis of een ander geschikt geneesmiddel",
+    "ingredient_slugs": [
+      "labetalol-hydrochloride",
+      "timolol-maleaat"
+    ],
+    "drug_classes": [
+      "Niet-cardioselectieve β-blokker"
+    ]
+  },
+  {
+    "list_num": 2,
+    "nr": "28",
+    "title": "Anti-emetica die de dopaminereceptor inhiberen (bv. alizapride, metoclopramide)",
+    "comorbiditeit": "Ziekte van Parkinson",
+    "rationale": "Dopaminereceptorantagonist en kunnen de symptomen van de ziekte van Parkinson verergeren",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Als therapie nodig is: bespreek de niet-farmacologische aanpak en overweeg domperidon in de laagst mogelijke dosis en beperk de gebruiksduur (max. dagen)",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 2,
+    "nr": "29",
+    "title": "Geneesmiddelen die constipatie",
+    "comorbiditeit": "Constipatie",
+    "rationale": "Kunnen constipatie verergeren",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Als therapie nodig is: verkies overschakeling naar een veiliger alternatief met dezelfde indicatie (bv. met geen of minder anticholinerge werking, zie Tabel A) 3. Indien niet mogelijk: overweeg een dosisverlaging en beperk de gebruiksduur 4. Bespreek de niet-farmacologische aanpak van constipatie en voeg (indien nodig) een osmotisch laxativum toe",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 2,
+    "nr": "30",
+    "title": "Predniso(lo)nequivalent > 7,5 mg/dag",
+    "comorbiditeit": "Diabetes",
+    "rationale": "Kan diabetes mellitus verergeren",
+    "alternatief": "1. Waarschuw de patiënt voor mogelijke ontregeling van de bloedglucosespiegel en adviseer om de bloedglucosespiegel en bloeddruk meer op te volgen 2. Indien mogelijk: overweeg een dosisverlaging van het corticosteroïd en beperk de gebruiksduur",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 2,
+    "nr": "31",
+    "title": "Antipsychotica behalve clozapine of quetiapine",
+    "comorbiditeit": "Ziekte van Parkinson",
+    "rationale": "Dopaminereceptorantagonist en kunnen de symptomen van de ziekte van Parkinson verergeren",
+    "alternatief": "1. Bespreek met de specialist: dosisaanpassing/vervanging van Parkinson medicatie die de psychotische symptomen mogelijk heeft veroorzaakt of een dosisverlaging en/of eventuele stop van het antipsychoticum 2. Als therapie nodig is: bespreek het overschakelen naar clozapine of quetiapine met de specialist, bij voorkeur in een lagere dosis voor patiënten met de ziekte van Parkinson",
+    "ingredient_slugs": [
+      "clozapine",
+      "quetiapine-fumaraat"
+    ],
+    "drug_classes": []
+  },
+  {
+    "list_num": 2,
+    "nr": "32",
+    "title": "Geneesmiddelen met anticholinerge eigenschappen (bv. antihistaminica, antidepressiva, antipsychotica, spasmolytica, zie Tabel A)",
+    "comorbiditeit": "Benigne prostaathypertrofie",
+    "rationale": "Verhoogd risico op anticholinerge ongewenste effecten kan de urinestroom verminderen en urineretentie veroorzaken",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Als therapie nodig is: overweeg een niet-farmacologische aanpak en/of verkies een overschakeling naar een veiliger geneesmiddel met dezelfde indicatie met geen of minder anticholinerge werking (zie Tabel A) 3. Indien niet mogelijk: overweeg een dosisverlaging en beperk de gebruiksduur",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 2,
+    "nr": "33",
+    "title": "Geneesmiddelen met anticholinerge eigenschappen (bv. antihistaminica, antidepressiva, antipsychotica, spasmolytica, zie Tabel A) obstructive pulmonary disease of chronisch obstructief",
+    "comorbiditeit": "Dementie/ verminderde cognitie longlijden; RAAS: renine-angiotensine-aldosteron",
+    "rationale": "Een verhoogde anticholinerge medicatielast kan de cognitieve en gedragsfunctie verslechteren; Verhoogd risico op ongewenste effecten t.h.v. het centraal zenuwstelsel systeem",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is, zo niet: stop de therapie 2. Als therapie nodig is: bespreek de niet-farmacologische aanpak. Verkies overschakeling naar een veiliger alternatief met dezelfde indicatie met geen of minder anticholinerge werking (zie Tabel A) 3. Indien niet mogelijk: overweeg een dosisverlaging en beperk de gebruiksduur GheOP3S-tool",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 3,
+    "nr": "34",
+    "title": "Predniso(lo)nequivalent van ≥ 7,5 mg/dag voor ≥ maanden zonder calcium/vitamine D suppletie en bisfosfonaat",
+    "comorbiditeit": null,
+    "rationale": "Langdurig gebruik van corticosteroïden is geassocieerd met een verhoogd risico op botverlies en fracturen 2.",
+    "alternatief": "1. Als langdurige corticosteroïdtherapie nodig is: bespreek de niet-farmacologische aanpak om het risico op vallen en fracturen te verminderen Start met calcium/vitamine D en overweeg om een bisfosfonaat (bv. alendronaat) te starten volgens de nationale richtlijnen",
+    "ingredient_slugs": [
+      "calcium-carbonaat"
+    ],
+    "drug_classes": [
+      "bisfosfonaat"
+    ]
+  },
+  {
+    "list_num": 3,
+    "nr": "35",
+    "title": "Opioïd zonder laxativum",
+    "comorbiditeit": null,
+    "rationale": "Opioïden hebben een nadelige invloed op de sensomotorische functie van het gastro-intestinale kanaal, wat kan leiden tot darmstoornissen die een spectrum van symptomen kunnen omvatten zoals nausea, braken, opgeblazen gevoel, gastro-oesofageale reflux-gerelateerde symptomen en constipatie",
+    "alternatief": "1. Evalueer opnieuw of de indicatie voor opioïden nog steeds aanwezig is, zo niet: stop de therapie (zie criterium ‘Opioïden’) 2. Als therapie nodig is: bespreek de niet-farmacologische aanpak van constipatie en overweeg om een osmotisch laxativum te starten (vooral bij chronisch gebruik)",
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "opioïd"
+    ]
+  },
+  {
+    "list_num": 3,
+    "nr": "36",
+    "title": "Methotrexaat zonder foliumzuursupplement",
+    "comorbiditeit": null,
+    "rationale": "Methotrexaat (een antimetaboliet) heeft een antagonistisch effect op het foliumzuurmetabolisme, wat kan leiden tot mucosale, gastro- intestinale, hepatische of hematologische ongewenste effecten; Suppletie met foliumzuur of folinezuur kan deze ongewenste effecten verminderen",
+    "alternatief": "Voeg een foliumzuursupplement toe: eenmaal per week tot mg (één dag na de inname van methotrexaat), of dagelijks mg",
+    "ingredient_slugs": [
+      "methotrexaat-dinatrium"
+    ],
+    "drug_classes": []
+  },
+  {
+    "list_num": 3,
+    "nr": "37",
+    "title": "Osteoporose therapie (bv. bisfosfonaten, denosumab, selectieve oestrogeenreceptor-modulatoren, teriparatide) zonder voldoende calcium/vitamine D",
+    "comorbiditeit": null,
+    "rationale": "Gecombineerde calcium- en vitamine D supplementen in een dagelijkse 1. dosis van respectievelijk 0,5-1,2 g en 400-800 IE worden over het algemeen aanbevolen bij mensen die osteoporotische therapie krijgen, aangezien de evidentie voor de werkzaamheid van deze interventies voornamelijk gebaseerd is op gelijktijdige toediening van het geneesmiddel met calcium- en vitamine D supplementen",
+    "alternatief": "Evalueer opnieuw of de osteoporotische therapie nog steeds nodig is (< jaar of tot jaar voor hoogrisicopatiënten), zo niet (> jaar en geen hoogrisicopatiënt): stop de therapie 2. Als therapie nog steeds nodig is: start calcium (dosis afhankelijk van de inname via voeding) en vitamine D",
+    "ingredient_slugs": [
+      "calcium-carbonaat",
+      "denosumab"
+    ],
+    "drug_classes": []
+  },
+  {
+    "list_num": 3,
+    "nr": "38",
+    "title": "Oudere persoon zonder jaarlijkse griepvaccinatie",
+    "comorbiditeit": null,
+    "rationale": "Influenza bij oudere personen kan respiratoire complicaties veroorzaken (bv. pneumonie, exacerbatie van chronische respiratoire aandoening, ziekenhuisopnames en overlijden)",
+    "alternatief": "Bespreek de noodzaak van een griepvaccinatie met de arts en patiënt",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 3,
+    "nr": "39",
+    "title": "Oudere persoon met een",
+    "comorbiditeit": null,
+    "rationale": "Streptococcus pneumoniae is verantwoordelijk voor een aanzienlijke ziektelast en sterfte bij volwassenen wereldwijd, meestal door een pneumonie en minder vaak door invasieve pneumokokkeninfectie; Vaccinatie zou deze ziekte en sterfte kunnen verminderen",
+    "alternatief": "Bespreek de noodzaak van een pneumokokkenvaccinatie met de arts en patiënt. GheOP3S-tool",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "40",
+    "title": "Combinatie van geneesmiddelen die leiden tot een",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op digoxinetoxiciteit (bv. anorexia, nausea, braken, buikpijn, verwardheid, zwakte, lethargie, vermoeidheid, delirium, verwardheid, desoriëntatie, veranderingen in het gezichtsvermogen, onregelmatige hartslag, hartkloppingen)",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "41",
+    "title": "β-blokker (inclusief oogdruppels) + Verapamil/diltiazem",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op hypotensie, sinusbradycardie, stoornissen in de atrioventriculaire geleiding en verminderde linkerventrikelfunctie",
+    "alternatief": null,
+    "ingredient_slugs": [
+      "diltiazem-hydrochloride"
+    ],
+    "drug_classes": [
+      "β-blokker"
+    ]
+  },
+  {
+    "list_num": 4,
+    "nr": "42",
+    "title": "Calciumantagonist + Sterke CYP3A4-inhibitor (bv. claritromycine, erythromycine, pompelmoessap, itraconazol, ketoconazol, posaconazol, ritonavir, saquinavir, voriconazol)",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op hypotensie of shock",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "calciumantagonist"
+    ]
+  },
+  {
+    "list_num": 4,
+    "nr": "43",
+    "title": "RAAS-inhibitor + Kaliumsparend diureticum/kaliumsupplement/kaliumbevattend geneesmiddel",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op hyperkaliëmie",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "kaliumsparend diureticum",
+      "RAAS-inhibitor"
+    ]
+  },
+  {
+    "list_num": 4,
+    "nr": "44",
+    "title": "RAAS inhibitor + Trimethoprim/sulfamethoxazol",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op hyperkaliëmie",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "45",
+    "title": "Combinatie van QT-verlengende geneesmiddelen of combinatie van een QT-verlengend geneesmiddel en een geneesmiddel dat het metabolisme van dit geneesmiddel remt",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op QT-verlenging, torsade de pointes",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "46",
+    "title": "Combinatie van geneesmiddelen die leiden tot een",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op bloeding",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "47",
+    "title": "Theofylline + Chinolone/macrolide",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op theofyllinetoxiciteit",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "macrolide"
+    ]
+  },
+  {
+    "list_num": 4,
+    "nr": "48",
+    "title": "Orale antidiabetica met",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op het maskeren van de eerste symptomen van hypoglykemie (tachycardie, tremor) en op een vertraagd herstel van hypoglykemie",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "49",
+    "title": "Fosfodiësterase type 5-inhibitoren (bv. sildenafil, tadalafil, vardenafil) + nitraat",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op mogelijk ernstige hypotensie of zelfs een myocardinfarct",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "50",
+    "title": "Systemisch* NSAID + Diureticum",
+    "comorbiditeit": null,
+    "rationale": "↓ antihypertensief/diuretisch effect, ↑ risico op verergering van hartfalen of oedeem en nierfalen",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "NSAID",
+      "diureticum"
+    ]
+  },
+  {
+    "list_num": 4,
+    "nr": "51",
+    "title": "Systemisch* NSAID + RAAS-inhibitor",
+    "comorbiditeit": null,
+    "rationale": "↓ van het antihypertensief effect; bij hartfalen: ↓ in nierfunctie + hyperkaliëmie",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": [
+      "RAAS-inhibitor",
+      "NSAID"
+    ]
+  },
+  {
+    "list_num": 4,
+    "nr": "52",
+    "title": "Combinatie van valrisicoverhogende geneesmiddelen (zie Tabel B)",
+    "comorbiditeit": null,
+    "rationale": "Valrisicoverhogende geneesmiddelen kunnen de prevalentie van vallen verhogen, wat kan leiden tot een hogere morbiditeit en sterfte, meer gezondheidszorgbehoeften en hogere kosten (bv. door fracturen)",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "53",
+    "title": "Alprazolam/triazolam/zolpidem/zopiclon + Sterke CYP3A4-inhibitor (e.g. claritromycine, erythromycine, pompelmoessap, itraconazole, ketoconazole, posaconazole, ritonavir, saquinavir, voriconazole)",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op versterkt effect van hypnotica leidend tot een hoger risico op sedatie, valincidenten en heupfracturen",
+    "alternatief": null,
+    "ingredient_slugs": [
+      "alprazolam",
+      "zolpidem-hemitartraat",
+      "zopiclon"
+    ],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "54",
+    "title": "Combinatie van geneesmiddelen die leiden tot een",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op lithiumtoxiciteit (bv. diarree, nausea, braken, ataxie, slaperigheid, verwardheid, spierzwakte, tremor)",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "55",
+    "title": "Combinatie van geneesmiddelen met anticholinerge eigenschappen (zie Tabel A)",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op anticholinerge ongewenste effecten",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "56",
+    "title": "Fenytoïne + Trimethoprim/sulfamethoxazol",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op fenytoïnetoxiciteit (bv. hoofdpijn, duizeligheid, nausea, braken, ataxie, nystagmus, evenwichtsverlies)",
+    "alternatief": null,
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 4,
+    "nr": "57",
+    "title": "Tamoxifen + Sterke CYP2D6-inhibitor (bv. paroxetine/fluoxetine)",
+    "comorbiditeit": null,
+    "rationale": "↑ risico op verminderde werkzaamheid van tamoxifen, met ↑ risico op terugkeer van borstkanker GheOP3S-tool",
+    "alternatief": null,
+    "ingredient_slugs": [
+      "paroxetine-hydrochloride"
+    ],
+    "drug_classes": []
+  },
+  {
+    "list_num": 5,
+    "nr": "58",
+    "title": "Het elektronisch patiëntendossier of medicatielijst is onvolledig of inaccuraat",
+    "comorbiditeit": null,
+    "rationale": "Een volledig en accuraat medicatiedossier is nodig om een medicatienazicht uit te voeren",
+    "alternatief": "Voer medicatiereconciliatie uit: voeg ontbrekende medicatie toe zoals inhalatoren, injecties, pleisters, druppels, zelfzorggeneesmiddelen (bv. NSAID, acetylsalicylzuur, voedingssupplementen, kruidengeneesmiddelen) en verwijder medicatie die de patiënt niet meer gebruikt. Bezorg de patiënt een geüpdatete medicatielijst",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 5,
+    "nr": "59",
+    "title": "Contra-indicaties -die ondubbelzinnig afgeleid",
+    "comorbiditeit": null,
+    "rationale": "Contra-indicaties zijn nodig om een medicatienazicht uit te voeren",
+    "alternatief": "Voeg bekende contra-indicaties toe aan het elektronisch patiëntendossier",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 5,
+    "nr": "60",
+    "title": "De patiënt gebruikt medicatie met een twijfelachtige werkzaamheid en/of een ongunstig veiligheidsprofiel, bv.: a) Venotrope of vaatverwijdende geneesmiddelen (bv. cinnarizine, naftidrofuryl, pentoxifylline, piracetam) b) Ginkgo biloba, Panax Ginseng, rodegist-rijst, glucosamine, chondroïtine c) Vitaminen, mineralen en sporenelementen zonder een gedocumenteerd tekort",
+    "comorbiditeit": null,
+    "rationale": "Medicatie met een twijfelachtige werkzaamheid en/of een ongunstig veiligheidsprofiel verhoogt het risico op ongewenste effecten, mogelijke interacties of medicatielast bij oudere personen Twijfelachtige werkzaamheid; Verhoogd risico op ongewenste effecten (bv. orthostatische hypotensie en vallen) en interacties Twijfelachtige werkzaamheid; Verhoogd risico op ongewenste effecten en interacties Verhoogd risico op ongewenste effecten en interacties; Onnodig toenemende medicatielast bij oudere personen",
+    "alternatief": "1. Evalueer opnieuw of de indicatie nog steeds aanwezig is en verkies om de therapie te stoppen 2. Verkies een niet-farmacologische aanpak, een geneesmiddel met een gunstige risico/baten- verhouding voor een bepaalde tijd, of verwijs naar een arts 1. Verkies om de therapie te stoppen 2. Overweeg een niet-farmacologische aanpak, een geneesmiddel met een gunstige risico/baten- verhouding voor een bepaalde tijd, of verwijs naar een arts 1. Evalueer of de patiënt een gedocumenteerd tekort heeft, zo niet: stop de therapie 2. Indien therapie nodig is: overweeg om de gebruiksduur te beperken",
+    "ingredient_slugs": [
+      "ginkgo-biloba-extract-egb761"
+    ],
+    "drug_classes": []
+  },
+  {
+    "list_num": 5,
+    "nr": "61",
+    "title": "Medicatie wordt voorgeschreven om een ongewenst effect van een ander geneesmiddel te behandelen (voorschrijfcascade)",
+    "comorbiditeit": null,
+    "rationale": "Voorschrijfcascades kunnen leiden tot ongunstige uitkomsten en onnodige kosten voor patiënten en de gezondheidszorg; Bijdragende factoren zijn onder meer hogere leeftijd en polyfarmacie",
+    "alternatief": "Contacteer de voorschrijver en bespreek het stoppen (of een dosisverlaging) van het geneesmiddel dat het ongewenst effect veroorzaakt. Bespreek de mogelijke niet-farmacologische aanpak of overschakeling naar een veiliger alternatief",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 5,
+    "nr": "62",
+    "title": "De nierfunctie van de patiënt werd niet in rekening gebracht tijdens het gebruik van renaal geklaarde medicatie (zie Addendum “Medicatie die vermeden dient te worden of met voorzichtigheid gebruikt moet worden bij oudere personen met een verminderde nierfunctie”)",
+    "comorbiditeit": null,
+    "rationale": "Bij personen met een verminderde nierfunctie dienen dosisaanpassingen overwogen te worden voor renaal geklaarde medicatie om de medicatieveiligheid te garanderen",
+    "alternatief": "Raadpleeg de SKP, het nationaal formularium en/of het Renal Drug Handbook voor specifieke aanbevelingen en contacteer de voorschrijver om de dosis of frequentie van het geneesmiddel aan te passen",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 5,
+    "nr": "63",
+    "title": "De kwetsbare patiënt of patiënt met een verminderde cognitie/visus heeft problemen met zijn/haar medicatiemanagement of heeft zorgbehoeften die nog niet aangepakt zijn",
+    "comorbiditeit": null,
+    "rationale": "Medicatiemanagement is complex voor mensen met een verminderde cognitie of visus. Dit kan een verhoogd risico geven op medicatiefouten, geneesmiddelgerelateerde ziekenhuisopnames en afhankelijkheid van anderen om te helpen; Het risico is nog groter bij medicatie die een strikt doseringsregime vereist",
+    "alternatief": "Bespreek de nood aan aanvullende hulp van een formele (bv. verpleegkundige) of informele zorgverlener (bv. partner, familie, buur)",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  },
+  {
+    "list_num": 5,
+    "nr": "64",
+    "title": "Bepaalde farmaceutische zorgaspecten werden onvoldoende gemanaged voor of door de patiënt (vooral belangrijk voor patiënten met polyfarmacie): a) De patiënt is onvoldoende geïnformeerd over zijn/haar medicatie, toestand of diagnose en mogelijke niet- farmacologische alternatieven",
+    "comorbiditeit": null,
+    "rationale": "Het verlenen van algemene farmaceutische zorg aan oudere patiënten kan o.a. de medicatiekennis, therapietrouw, medicatiegeschiktheid, medicatie effectiviteit en veiligheid vergroten; Oudere personen begrijpen vaak hun medicatieschema of lijst niet",
+    "alternatief": "Geef aanvullende informatie (bv. advies, patiëntfolder) of verwijs naar een arts GheOP3S-tool",
+    "ingredient_slugs": [],
+    "drug_classes": []
+  }
+]

@@ -1,0 +1,15 @@
+# Python dependencies voor de farmapuntbe.reviews tools.
+# Installeren:
+#     pip install -r sources/requirements.txt
+#     playwright install chromium    # alleen nodig voor fetch_phil_interactions.py
+
+# build_resident_notes.py, build_cnk_stubs.py, enrich_cnk.py
+openpyxl>=3.1
+
+# build_gheops_kb.py
+pdfplumber>=0.11
+
+# fetch_phil_interactions.py
+playwright>=1.40
+beautifulsoup4>=4.12
+python-dotenv>=1.0

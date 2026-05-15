@@ -1,0 +1,9 @@
+/.obsidian/
+
+# Credentials and scraper caches
+sources/.env
+sources/.cache/
+carecenter/
+chromedriver/
+knowledgebase/
+
