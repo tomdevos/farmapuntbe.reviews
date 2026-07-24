@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->unsignedTinyInteger('list_num');
             $table->string('nr');
-            $table->string('title');
+            $table->text('title');
             $table->text('comorbiditeit')->nullable();
             $table->text('rationale')->nullable();
             $table->text('alternatief')->nullable();
