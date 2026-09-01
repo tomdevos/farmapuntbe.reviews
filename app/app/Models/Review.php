@@ -16,12 +16,13 @@ class Review extends Model
 
     protected $fillable = [
         'resident_id', 'user_id', 'started_on', 'due_on',
-        'status', 'finalized_at', 'doctor_summary_md',
+        'status', 'gheops_screened_at', 'finalized_at', 'doctor_summary_md',
     ];
 
     protected $casts = [
         'started_on' => 'date',
         'due_on' => 'date',
+        'gheops_screened_at' => 'datetime',
         'finalized_at' => 'datetime',
     ];
 

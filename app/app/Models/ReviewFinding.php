@@ -17,7 +17,7 @@ class ReviewFinding extends Model
     protected $fillable = [
         'review_id', 'source', 'severity',
         'active_ingredient_id', 'gheops_criterion_id',
-        'title', 'body_md', 'dismissed_at', 'position',
+        'title', 'body_md', 'note_md', 'fingerprint', 'dismissed_at', 'position',
     ];
 
     protected $casts = [

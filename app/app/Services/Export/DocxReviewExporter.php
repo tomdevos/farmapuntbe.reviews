@@ -155,6 +155,9 @@ class DocxReviewExporter
                     if ($f->body_md) {
                         $section->addText($f->body_md, ['size' => 9, 'color' => '555555']);
                     }
+                    if ($f->note_md) {
+                        $section->addText($f->note_md, ['size' => 9, 'italic' => true, 'color' => self::FARMAPUNT_GREEN]);
+                    }
                 }
             } else {
                 $section->addText('Alles ok.', ['italic' => true, 'color' => '999999']);

@@ -14,7 +14,7 @@ class PhilBulkController extends Controller
 {
     public function forDepartment(Request $request, Department $department)
     {
-        if (! env('PHIL_USER') || ! env('PHIL_PASS')) {
+        if (! config('phil.user') || ! config('phil.pass')) {
             return back()->withErrors(['phil' => 'Phil-credentials ontbreken in .env (PHIL_USER, PHIL_PASS).']);
         }
 
@@ -27,7 +27,7 @@ class PhilBulkController extends Controller
 
     public function forCareCenter(Request $request, CareCenter $careCenter)
     {
-        if (! env('PHIL_USER') || ! env('PHIL_PASS')) {
+        if (! config('phil.user') || ! config('phil.pass')) {
             return back()->withErrors(['phil' => 'Phil-credentials ontbreken in .env (PHIL_USER, PHIL_PASS).']);
         }
 
@@ -45,17 +45,15 @@ class PhilBulkController extends Controller
      */
     private function dispatchForResidents($residents): array
     {
-        // Pre-filter: only residents with at least one non-9999 CNK on an
-        // active schedule. Saves the worker from churning through empty cases.
+        // Pre-filter: only residents with at least one CNK Phil actually knows
+        // on an active schedule. Saves the worker from churning through empty
+        // cases. Mirrors Medication::isPseudoCnk() — keep the two in step.
         $residentIdsWithCnks = MedicationSchedule::query()
             ->whereIn('resident_id', $residents->pluck('id'))
-            ->whereIn('schedule_type', [
-                MedicationSchedule::TYPE_CHRONIC,
-                MedicationSchedule::TYPE_TEMP,
-                MedicationSchedule::TYPE_PRN,
-            ])
+            ->active()
             ->join('medications', 'medications.id', '=', 'medication_schedules.medication_id')
-            ->where('medications.cnk', 'not like', '9999%')
+            ->where('medications.cnk', 'not like', '98%')
+            ->where('medications.cnk', 'not like', '99%')
             ->distinct()
             ->pluck('medication_schedules.resident_id')
             ->all();

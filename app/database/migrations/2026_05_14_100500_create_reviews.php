@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('severity')->nullable();
             $table->foreignId('active_ingredient_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('gheops_criterion_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('title');
+            $table->text('title');
             $table->text('body_md')->nullable();
             $table->timestamp('dismissed_at')->nullable();
             $table->unsignedSmallInteger('position')->default(0);

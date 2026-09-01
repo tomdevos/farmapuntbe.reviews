@@ -31,8 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/reviews/{review}/findings/{finding}', [ReviewController::class, 'updateFinding'])->name('reviews.findings.update');
     Route::delete('/reviews/{review}/findings/{finding}', [ReviewController::class, 'destroyFinding'])->name('reviews.findings.destroy');
     Route::post('/reviews/{review}/attentions', [ReviewController::class, 'storeAttention'])->name('reviews.attentions.store');
+    Route::patch('/reviews/{review}/attentions/{attention}', [ReviewController::class, 'updateAttention'])->name('reviews.attentions.update');
     Route::delete('/reviews/{review}/attentions/{attention}', [ReviewController::class, 'destroyAttention'])->name('reviews.attentions.destroy');
     Route::post('/reviews/{review}/finalize', [ReviewController::class, 'finalize'])->name('reviews.finalize');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
     Route::get('/exports/create', [ReviewExportController::class, 'create'])->name('exports.create');
     Route::post('/exports', [ReviewExportController::class, 'store'])->name('exports.store');

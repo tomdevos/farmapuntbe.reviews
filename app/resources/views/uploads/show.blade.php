@@ -33,7 +33,20 @@
                             <li>Schedules ({{ $type }}): <strong>{{ $n }}</strong></li>
                         @endforeach
                         <li>Nieuwe CNK-stubs: <strong>{{ count($s['unknown_cnks'] ?? []) }}</strong></li>
+                        @if (! empty($s['dropped_rows']))
+                            <li class="text-amber-700">Regels zonder bruikbare CNK (niet geïmporteerd): <strong>{{ count($s['dropped_rows']) }}</strong></li>
+                        @endif
                     </ul>
+                    @if (! empty($s['dropped_rows']))
+                        <details class="mt-3 text-sm">
+                            <summary class="cursor-pointer text-amber-700">Toon niet-geïmporteerde regels</summary>
+                            <ul class="mt-2 list-disc list-inside text-gray-600">
+                                @foreach ($s['dropped_rows'] as $d)
+                                    <li>{{ $d['resident'] }} — {{ $d['name'] }} (CNK "{{ $d['cnk'] }}")</li>
+                                @endforeach
+                            </ul>
+                        </details>
+                    @endif
                     @if (! empty($s['unknown_cnks']))
                         <details class="mt-3 text-sm">
                             <summary class="cursor-pointer text-emerald-700">Toon onbekende CNK's</summary>

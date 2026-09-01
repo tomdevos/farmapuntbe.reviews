@@ -42,11 +42,16 @@ class GheopsScreener
     {
         $residentInns = $this->residentIngredients($resident);
 
-        // Wipe existing GheOPS findings for this review — same-day reruns replace.
-        $review->findings()->where('source', ReviewFinding::SOURCE_GHEOPS)->delete();
+        // Reruns upsert per criterium instead of wiping the lot, so the
+        // pharmacist's uitleg and "negeer" survive a refresh.
+        $existing = $review->findings()
+            ->where('source', ReviewFinding::SOURCE_GHEOPS)
+            ->get()
+            ->keyBy('gheops_criterion_id');
 
         $matches = collect();
         $position = 0;
+        $seen = [];
 
         foreach ($this->criteria() as $criterion) {
             $matched = $this->matchCriterion($criterion, $residentInns);
@@ -57,11 +62,42 @@ class GheopsScreener
                 continue;
             }
 
-            $finding = $this->createFinding($review, $criterion, $matched, $position++);
-            $matches->push($finding);
+            $seen[] = $criterion->id;
+            $matches->push(
+                $this->upsertFinding($review, $existing->get($criterion->id), $criterion, $matched, $position++)
+            );
         }
 
+        // Criteria that no longer match (medication stopped, schema changed).
+        $review->findings()
+            ->where('source', ReviewFinding::SOURCE_GHEOPS)
+            ->when($seen !== [], fn ($q) => $q->where(function ($q) use ($seen) {
+                $q->whereNull('gheops_criterion_id')->orWhereNotIn('gheops_criterion_id', $seen);
+            }))
+            ->delete();
+
+        $review->update(['gheops_screened_at' => now()]);
+
         return $matches;
+    }
+
+    /**
+     * Screen unless this review has been screened before. Used by every path
+     * that opens a review without the pharmacist pressing "Nieuwe review"
+     * (the Phil job, phil:fetch, and opening an old review). A finalized
+     * review is a closed record and is never touched — use screen() for that.
+     */
+    public function ensureScreened(Review $review, bool $force = false): void
+    {
+        if ($review->status === Review::STATUS_FINALIZED) {
+            return;
+        }
+        if (! $force && $review->gheops_screened_at !== null) {
+            return;
+        }
+        if ($resident = $review->resident) {
+            $this->screen($resident, $review);
+        }
     }
 
     /**
@@ -71,11 +107,7 @@ class GheopsScreener
     {
         $rows = MedicationSchedule::query()
             ->where('resident_id', $resident->id)
-            ->whereIn('schedule_type', [
-                MedicationSchedule::TYPE_CHRONIC,
-                MedicationSchedule::TYPE_TEMP,
-                MedicationSchedule::TYPE_PRN,
-            ])
+            ->active()
             ->with('medication.activeIngredients')
             ->get();
 
@@ -174,8 +206,9 @@ class GheopsScreener
         return count($sides) >= 2;
     }
 
-    private function createFinding(
+    private function upsertFinding(
         Review $review,
+        ?ReviewFinding $existing,
         GheopsCriterion $criterion,
         array $matched,
         int $position,
@@ -193,13 +226,23 @@ class GheopsScreener
         }
         $body[] = '_Matches:_ ' . $matchStr;
 
-        return ReviewFinding::create([
+        $attributes = [
+            'title' => "Lijst {$criterion->list_num}, Criterium {$criterion->nr}: {$criterion->title}",
+            'body_md' => implode("\n\n", $body),
+            'fingerprint' => 'gheops:' . $criterion->id,
+            'position' => $position,
+        ];
+
+        // note_md and dismissed_at are deliberately left alone.
+        if ($existing) {
+            $existing->update($attributes);
+            return $existing;
+        }
+
+        return ReviewFinding::create($attributes + [
             'review_id' => $review->id,
             'source' => ReviewFinding::SOURCE_GHEOPS,
             'gheops_criterion_id' => $criterion->id,
-            'title' => "Lijst {$criterion->list_num}, Criterium {$criterion->nr}: {$criterion->title}",
-            'body_md' => implode("\n\n", $body),
-            'position' => $position,
         ]);
     }
 

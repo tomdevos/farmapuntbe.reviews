@@ -13,7 +13,17 @@
         $gheopsFindings = $findings['gheops'] ?? collect();
         $philFindings   = $findings['phil'] ?? collect();
         $manualFindings = $findings['manual'] ?? collect();
-        $timeSlots = ['06:00', '08:00', '12:00', '14:00', '17:00', '18:00', '20:00', '22:00'];
+        // Time-slot columns follow the data: union of all dosage keys in the
+        // active schema (carecenters use different rounds), standard grid as fallback.
+        $timeSlots = $chronic->concat($temp)
+            ->pluck('dosages')
+            ->filter()
+            ->flatMap(fn ($d) => array_keys($d))
+            ->filter(fn ($k) => preg_match('/^\d{1,2}:\d{2}$/', (string) $k))
+            ->unique()->sort()->values()->all();
+        if (count($timeSlots) === 0) {
+            $timeSlots = ['06:00', '08:00', '12:00', '14:00', '17:00', '18:00', '20:00', '22:00'];
+        }
     @endphp
 
     <div class="py-8">
@@ -21,6 +31,11 @@
 
             @if (session('status'))
                 <div class="p-3 bg-emerald-50 text-emerald-800 rounded">{{ session('status') }}</div>
+            @endif
+            @if ($errors->any())
+                <div class="p-3 bg-red-50 text-red-700 rounded">
+                    @foreach ($errors->all() as $err)<div>{{ $err }}</div>@endforeach
+                </div>
             @endif
 
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6 grid grid-cols-1 sm:grid-cols-4 gap-4 text-sm">
@@ -138,9 +153,18 @@
 
                 {{-- 1. Auto-findings --}}
                 <div class="space-y-6 lg:col-span-2">
-                    <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+                    <div id="gheops" class="bg-white dark:bg-gray-800 shadow rounded-lg scroll-mt-4">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-                            <h3 class="font-semibold">GheOP³S-bevindingen ({{ $gheopsFindings->count() }})</h3>
+                            <div>
+                                <h3 class="font-semibold">GheOP³S-bevindingen ({{ $gheopsFindings->count() }})</h3>
+                                <p class="text-xs text-gray-500">
+                                    @if ($review->gheops_screened_at)
+                                        Gescreend op {{ $review->gheops_screened_at->format('d-m-Y H:i') }}.
+                                    @else
+                                        Nog niet gescreend.
+                                    @endif
+                                </p>
+                            </div>
                             <form method="POST" action="{{ route('reviews.refresh-gheops', $review) }}">
                                 @csrf
                                 <button class="text-sm text-emerald-700 hover:underline">↻ Vernieuwen</button>
@@ -148,10 +172,10 @@
                         </div>
                         <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                             @forelse ($gheopsFindings as $f)
-                                <li class="px-6 py-3 {{ $f->dismissed_at ? 'opacity-50 line-through' : '' }}">
+                                <li id="finding-{{ $f->id }}" class="px-6 py-3 scroll-mt-4 {{ $f->dismissed_at ? 'opacity-50' : '' }}">
                                     <div class="flex items-start justify-between gap-3">
                                         <div class="text-sm">
-                                            <div class="font-medium">{{ $f->title }}</div>
+                                            <div class="font-medium {{ $f->dismissed_at ? 'line-through' : '' }}">{{ $f->title }}</div>
                                             @if ($f->body_md)
                                                 <div class="text-gray-600 dark:text-gray-300 mt-1 whitespace-pre-line">{{ $f->body_md }}</div>
                                             @endif
@@ -162,14 +186,21 @@
                                             <button class="text-xs text-gray-500 hover:text-red-600">{{ $f->dismissed_at ? '↺ Herstel' : '✕ Negeer' }}</button>
                                         </form>
                                     </div>
+                                    <x-finding-note :review="$review" :finding="$f" />
                                 </li>
                             @empty
-                                <li class="px-6 py-6 text-gray-500">Geen GheOP³S-matches voor deze bewoner.</li>
+                                <li class="px-6 py-6 text-gray-500">
+                                    @if ($review->gheops_screened_at)
+                                        Geen GheOP³S-matches voor deze bewoner.
+                                    @else
+                                        Nog niet gescreend — klik op "Vernieuwen".
+                                    @endif
+                                </li>
                             @endforelse
                         </ul>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+                    <div id="phil" class="bg-white dark:bg-gray-800 shadow rounded-lg scroll-mt-4">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
                             <h3 class="font-semibold">Phil-interacties ({{ $philFindings->count() }})</h3>
                             <form method="POST" action="{{ route('reviews.refresh-phil', $review) }}">
@@ -217,12 +248,21 @@
                                 <span class="ms-auto text-gray-400">Pagina ververst niet automatisch — herlaad om voortgang te zien.</span>
                             @endif
                         </div>
+
+                        @if ($philSkipped->isNotEmpty())
+                            {{-- Phil kent geen eigen bereidingen; zonder deze melding lijkt
+                                 "geen interactie" alsof het product wél nagekeken is. --}}
+                            <div class="px-6 py-2 text-xs bg-amber-50 dark:bg-amber-900/20 text-amber-800 dark:text-amber-200 border-b border-amber-100 dark:border-amber-900">
+                                <strong>Niet meegenomen in de Phil-controle</strong> (eigen bereiding, niet in Phil's catalogus) — zelf na te kijken:
+                                {{ $philSkipped->pluck('name')->implode(', ') }}
+                            </div>
+                        @endif
                         <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                             @forelse ($philFindings as $f)
-                                <li class="px-6 py-3 {{ $f->dismissed_at ? 'opacity-50 line-through' : '' }}">
+                                <li id="finding-{{ $f->id }}" class="px-6 py-3 scroll-mt-4 {{ $f->dismissed_at ? 'opacity-50' : '' }}">
                                     <div class="flex items-start justify-between gap-3">
                                         <div class="text-sm">
-                                            <div class="font-medium">
+                                            <div class="font-medium {{ $f->dismissed_at ? 'line-through' : '' }}">
                                                 @if ($f->severity)
                                                     <span class="inline-block px-1.5 py-0.5 mr-1 text-[10px] uppercase rounded
                                                         @switch($f->severity)
@@ -244,6 +284,7 @@
                                             <button class="text-xs text-gray-500 hover:text-red-600">{{ $f->dismissed_at ? '↺ Herstel' : '✕ Negeer' }}</button>
                                         </form>
                                     </div>
+                                    <x-finding-note :review="$review" :finding="$f" />
                                 </li>
                             @empty
                                 <li class="px-6 py-6 text-gray-500 text-sm">Nog geen Phil-data opgehaald.</li>
@@ -251,21 +292,33 @@
                         </ul>
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+                    <div id="observaties" class="bg-white dark:bg-gray-800 shadow rounded-lg scroll-mt-4">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                             <h3 class="font-semibold">Manuele observaties ({{ $manualFindings->count() }})</h3>
                         </div>
                         <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                             @forelse ($manualFindings as $f)
-                                <li class="px-6 py-3 flex items-start justify-between gap-3">
-                                    <div class="text-sm">
-                                        <div class="font-medium">{{ $f->title }}</div>
-                                        @if ($f->body_md)<div class="text-gray-600 mt-1 whitespace-pre-line">{{ $f->body_md }}</div>@endif
+                                <li id="finding-{{ $f->id }}" class="px-6 py-3 scroll-mt-4">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <div class="text-sm">
+                                            <div class="font-medium">{{ $f->title }}</div>
+                                            @if ($f->body_md)<div class="text-gray-600 dark:text-gray-300 mt-1 whitespace-pre-line">{{ $f->body_md }}</div>@endif
+                                        </div>
+                                        <form method="POST" action="{{ route('reviews.findings.destroy', [$review, $f]) }}"
+                                              onsubmit="return confirm('Deze observatie verwijderen?')">
+                                            @csrf @method('DELETE')
+                                            <button class="text-xs text-gray-500 hover:text-red-600">✕</button>
+                                        </form>
                                     </div>
-                                    <form method="POST" action="{{ route('reviews.findings.destroy', [$review, $f]) }}">
-                                        @csrf @method('DELETE')
-                                        <button class="text-xs text-gray-500 hover:text-red-600">✕</button>
-                                    </form>
+                                    <details class="mt-2">
+                                        <summary class="text-xs text-gray-500 cursor-pointer hover:text-emerald-700">✎ Bewerken</summary>
+                                        <form method="POST" action="{{ route('reviews.findings.update', [$review, $f]) }}" class="mt-2 space-y-2">
+                                            @csrf @method('PATCH')
+                                            <input type="text" name="title" required value="{{ $f->title }}" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">
+                                            <textarea name="body_md" rows="3" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">{{ $f->body_md }}</textarea>
+                                            <button class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-xs">Opslaan</button>
+                                        </form>
+                                    </details>
                                 </li>
                             @empty
                                 <li class="px-6 py-6 text-gray-500 text-sm">Nog geen manuele observaties.</li>
@@ -273,8 +326,8 @@
                         </ul>
                         <form method="POST" action="{{ route('reviews.findings.store', $review) }}" class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
                             @csrf
-                            <input type="text" name="title" required placeholder="Bv. 'Waarom 2× per dag Atorvastatine 20mg?'" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">
-                            <textarea name="body_md" placeholder="Toelichting (markdown)" rows="2" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900"></textarea>
+                            <input type="text" name="title" required placeholder="Bv. 'Waarom 2× per dag Atorvastatine 20mg?'" value="{{ old('title') }}" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">
+                            <textarea name="body_md" placeholder="Toelichting (markdown)" rows="2" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">{{ old('body_md') }}</textarea>
                             <button class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-sm">+ Observatie toevoegen</button>
                         </form>
                     </div>
@@ -282,22 +335,34 @@
 
                 {{-- 2. Aandachtspunten + finalize --}}
                 <div class="space-y-6">
-                    <div class="bg-white dark:bg-gray-800 shadow rounded-lg">
+                    <div id="aandachtspunten" class="bg-white dark:bg-gray-800 shadow rounded-lg scroll-mt-4">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
                             <h3 class="font-semibold">Algemene aandachtspunten ({{ $review->attentions->count() }})</h3>
                             <p class="text-xs text-gray-500">Verschijnen in WZC-export vóór de bewonerlijst.</p>
                         </div>
                         <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                             @forelse ($review->attentions as $a)
-                                <li class="px-6 py-3 flex items-start justify-between gap-3">
-                                    <div class="text-sm">
-                                        <div class="font-medium text-emerald-700">{{ $a->label }}</div>
-                                        @if ($a->body_md)<div class="text-gray-600 mt-1 whitespace-pre-line">{{ $a->body_md }}</div>@endif
+                                <li id="attention-{{ $a->id }}" class="px-6 py-3 scroll-mt-4">
+                                    <div class="flex items-start justify-between gap-3">
+                                        <div class="text-sm">
+                                            <div class="font-medium text-emerald-700">{{ $a->label }}</div>
+                                            @if ($a->body_md)<div class="text-gray-600 dark:text-gray-300 mt-1 whitespace-pre-line">{{ $a->body_md }}</div>@endif
+                                        </div>
+                                        <form method="POST" action="{{ route('reviews.attentions.destroy', [$review, $a]) }}"
+                                              onsubmit="return confirm('Dit aandachtspunt verwijderen?')">
+                                            @csrf @method('DELETE')
+                                            <button class="text-xs text-gray-500 hover:text-red-600">✕</button>
+                                        </form>
                                     </div>
-                                    <form method="POST" action="{{ route('reviews.attentions.destroy', [$review, $a]) }}">
-                                        @csrf @method('DELETE')
-                                        <button class="text-xs text-gray-500 hover:text-red-600">✕</button>
-                                    </form>
+                                    <details class="mt-2">
+                                        <summary class="text-xs text-gray-500 cursor-pointer hover:text-emerald-700">✎ Bewerken</summary>
+                                        <form method="POST" action="{{ route('reviews.attentions.update', [$review, $a]) }}" class="mt-2 space-y-2">
+                                            @csrf @method('PATCH')
+                                            <input type="text" name="label" required value="{{ $a->label }}" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">
+                                            <textarea name="body_md" rows="3" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">{{ $a->body_md }}</textarea>
+                                            <button class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-xs">Opslaan</button>
+                                        </form>
+                                    </details>
                                 </li>
                             @empty
                                 <li class="px-6 py-6 text-gray-500 text-sm">Geen aandachtspunten.</li>
@@ -305,8 +370,8 @@
                         </ul>
                         <form method="POST" action="{{ route('reviews.attentions.store', $review) }}" class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
                             @csrf
-                            <input type="text" name="label" required placeholder="Bv. 'L-thyroxine en koffie'" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">
-                            <textarea name="body_md" rows="2" placeholder="Bv. '30 min tot 1 uur interval respecteren.'" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900"></textarea>
+                            <input type="text" name="label" required placeholder="Bv. 'L-thyroxine en koffie'" value="{{ old('label') }}" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">
+                            <textarea name="body_md" rows="2" placeholder="Bv. '30 min tot 1 uur interval respecteren.'" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">{{ old('body_md') }}</textarea>
                             <button class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-sm">+ Toevoegen</button>
                         </form>
                     </div>
@@ -316,9 +381,19 @@
                         @if ($review->status === 'finalized')
                             <p class="text-sm text-emerald-700">Gefinaliseerd op {{ $review->finalized_at?->format('d-m-Y H:i') }}.</p>
                         @else
-                            <form method="POST" action="{{ route('reviews.finalize', $review) }}">
+                            <form method="POST" action="{{ route('reviews.finalize', $review) }}"
+                                  onsubmit="return confirm('Deze review finaliseren?')">
                                 @csrf
                                 <button class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-sm">✓ Review finaliseren</button>
+                            </form>
+
+                            {{-- Uitweg voor een per ongeluk gestarte review. Alleen voor
+                                 een draft: een gefinaliseerde review blijft staan. --}}
+                            <form method="POST" action="{{ route('reviews.destroy', $review) }}" class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"
+                                  onsubmit="return confirm('Deze review definitief verwijderen? Bevindingen, uitleg en aandachtspunten van deze review gaan mee. Eerdere reviews blijven behouden.')">
+                                @csrf @method('DELETE')
+                                <button class="text-xs text-gray-500 hover:text-red-600">✕ Review verwijderen</button>
+                                <p class="text-xs text-gray-400 mt-1">Voor een review die per ongeluk gestart is.</p>
                             </form>
                         @endif
                     </div>

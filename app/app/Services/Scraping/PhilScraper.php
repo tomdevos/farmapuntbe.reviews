@@ -2,6 +2,7 @@
 
 namespace App\Services\Scraping;
 
+use App\Models\Medication;
 use App\Models\MedicationSchedule;
 use App\Models\PhilFinding;
 use App\Models\PhilInteraction;
@@ -42,8 +43,8 @@ class PhilScraper
             throw new \RuntimeException("Bewoner {$resident->slug} heeft geen CNK's in actief schema.");
         }
 
-        $user = (string) env('PHIL_USER', '');
-        $pass = (string) env('PHIL_PASS', '');
+        $user = (string) config('phil.user', '');
+        $pass = (string) config('phil.pass', '');
         if ($user === '' || $pass === '') {
             throw new \RuntimeException('PHIL_USER en PHIL_PASS ontbreken in .env.');
         }
@@ -105,11 +106,11 @@ class PhilScraper
 
     private function makeClient(): Client
     {
-        if ($chrome = env('CHROME_PATH')) {
+        if ($chrome = config('chrome.binary')) {
             $_SERVER['PANTHER_CHROME_BINARY'] = $chrome;
         }
         $args = array_values(array_filter([
-            env('PHIL_HEADLESS', true) ? '--headless=new' : null,
+            config('phil.headless', true) ? '--headless=new' : null,
             '--no-sandbox',
             '--disable-dev-shm-usage',
             '--window-size=1280,900',
@@ -118,7 +119,7 @@ class PhilScraper
             'connection_timeout_in_ms' => 60_000,
             'request_timeout_in_ms' => 120_000,
         ];
-        $driver = env('CHROMEDRIVER_PATH') ?: null;
+        $driver = config('chrome.driver') ?: null;
         return Client::createChromeClient($driver, $args, $opts);
     }
 
@@ -350,25 +351,45 @@ class PhilScraper
 
     private function cnksForResident(Resident $resident): array
     {
-        return MedicationSchedule::query()
-            ->where('resident_id', $resident->id)
-            ->whereIn('schedule_type', [
-                MedicationSchedule::TYPE_CHRONIC,
-                MedicationSchedule::TYPE_TEMP,
-                MedicationSchedule::TYPE_PRN,
-            ])
-            ->with('medication:id,cnk')
-            ->get()
-            ->pluck('medication.cnk')
-            ->filter()
-            // Compounded preparations (magistrale bereidingen) start with 9999
-            // and aren't in Phil's catalogue — including them causes Phil's
-            // SPA to render an empty interactions page.
-            ->reject(fn ($cnk) => str_starts_with((string) $cnk, '9999'))
+        return self::activeMedications($resident)
+            ->pluck('cnk')
+            // Pseudo-CNKs aren't in Phil's catalogue, and sending one makes
+            // its SPA render an empty interactions page — so the whole check
+            // would silently come back without a single interaction.
+            ->reject(fn ($cnk) => Medication::isPseudoCnk($cnk))
             ->unique()
             ->sort()
             ->values()
             ->all();
+    }
+
+    /**
+     * Products left out of the interaction check because Phil doesn't know
+     * them. They must be assessed by hand, so callers surface this list.
+     *
+     * @return \Illuminate\Support\Collection<int, Medication>
+     */
+    public static function skippedMedications(Resident $resident): \Illuminate\Support\Collection
+    {
+        return self::activeMedications($resident)
+            ->filter(fn (Medication $m) => Medication::isPseudoCnk($m->cnk))
+            ->values();
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection<int, Medication>
+     */
+    private static function activeMedications(Resident $resident): \Illuminate\Support\Collection
+    {
+        return MedicationSchedule::query()
+            ->where('resident_id', $resident->id)
+            ->active()
+            ->with('medication:id,cnk,name')
+            ->get()
+            ->pluck('medication')
+            ->filter()
+            ->unique('id')
+            ->values();
     }
 
     private function stripHtml(string $html): string
@@ -541,24 +562,59 @@ class PhilScraper
         }
     }
 
+    /**
+     * Upsert on fingerprint rather than delete-then-insert, so the
+     * pharmacist's uitleg and "negeer" survive a re-fetch.
+     */
     private function mirrorIntoReview(PhilInteraction $interaction, Review $review): void
     {
-        $review->findings()->where('source', ReviewFinding::SOURCE_PHIL)->delete();
+        $existing = $review->findings()->where('source', ReviewFinding::SOURCE_PHIL)->get();
+        $byFingerprint = $existing->whereNotNull('fingerprint')->keyBy('fingerprint');
+        // Rows written before fingerprints existed are adopted by title, so
+        // notes and dismissals set before this change aren't lost.
+        $byTitle = $existing->whereNull('fingerprint')->keyBy('title');
         $position = $review->findings()->max('position') ?? 0;
+        $seen = [];
 
         foreach ($interaction->findings as $f) {
             $title = match ($f->severity) {
                 'voeding' => "{$f->med_a} + {$f->med_b} (voedingsinteractie)",
                 default => "{$f->med_a} + {$f->med_b}",
             };
+            $fingerprint = 'phil:' . sha1("{$f->severity}|{$f->med_a}|{$f->med_b}");
+            if (in_array($fingerprint, $seen, true)) {
+                continue; // Phil occasionally lists the same pair twice.
+            }
+            $seen[] = $fingerprint;
+
+            $current = $byFingerprint->get($fingerprint) ?? $byTitle->get($title);
+            if ($current) {
+                $current->update([
+                    'severity' => $f->severity,
+                    'title' => $title,
+                    'fingerprint' => $fingerprint,
+                ]);
+                continue;
+            }
+
             ReviewFinding::create([
                 'review_id' => $review->id,
                 'source' => ReviewFinding::SOURCE_PHIL,
                 'severity' => $f->severity,
                 'title' => $title,
                 'body_md' => null,
+                'fingerprint' => $fingerprint,
                 'position' => ++$position,
             ]);
         }
+
+        // Interactions Phil no longer reports (or leftovers from before
+        // fingerprints existed) are dropped.
+        $review->findings()
+            ->where('source', ReviewFinding::SOURCE_PHIL)
+            ->when($seen !== [], fn ($q) => $q->where(function ($q) use ($seen) {
+                $q->whereNull('fingerprint')->orWhereNotIn('fingerprint', $seen);
+            }))
+            ->delete();
     }
 }

@@ -18,7 +18,7 @@
                     <p>
                         <strong class="med">{{ $lead }}{{ $tail !== '' ? ':' : '' }}</strong>
                         {{ $tail }}
-                        @if ($f->body_md)<br><span style="color:#555;">{{ $f->body_md }}</span>@endif
+                        @if ($f->body_md)<br><span style="color:#555;">{{ $f->body_md }}</span>@endif@if ($f->note_md)<br><span style="color:#1f7a4d;font-style:italic;">{{ $f->note_md }}</span>@endif
                     </p>
                 @endforeach
             @else

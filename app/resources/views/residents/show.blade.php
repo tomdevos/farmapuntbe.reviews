@@ -11,11 +11,30 @@
     </x-slot>
 
     @php
-        $timeSlots = ['06:00', '08:00', '12:00', '14:00', '17:00', '18:00', '20:00', '22:00'];
+        // Time-slot columns follow the data: union of all dosage keys in the
+        // active schema (carecenters use different rounds), standard grid as fallback.
+        $timeSlots = $chronic->concat($temp)
+            ->pluck('dosages')
+            ->filter()
+            ->flatMap(fn ($d) => array_keys($d))
+            ->filter(fn ($k) => preg_match('/^\d{1,2}:\d{2}$/', (string) $k))
+            ->unique()->sort()->values()->all();
+        if (count($timeSlots) === 0) {
+            $timeSlots = ['06:00', '08:00', '12:00', '14:00', '17:00', '18:00', '20:00', '22:00'];
+        }
     @endphp
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+
+            @if (session('status'))
+                <div class="p-3 bg-emerald-50 text-emerald-800 rounded">{{ session('status') }}</div>
+            @endif
+            @if ($errors->any())
+                <div class="p-3 bg-red-50 text-red-700 rounded">
+                    @foreach ($errors->all() as $err)<div>{{ $err }}</div>@endforeach
+                </div>
+            @endif
 
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
@@ -29,9 +48,23 @@
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
                     <h3 class="font-semibold">Therapieschema</h3>
-                    <form method="POST" action="{{ route('reviews.start', $resident) }}">
+                    @php
+                        // Eén klik maakte vroeger meteen een nieuwe review aan; de
+                        // bevestiging noemt daarom wat er staat te gebeuren.
+                        $openReview = $resident->reviews->firstWhere('status', 'draft');
+                        $lastFinalized = $resident->reviews->firstWhere('status', 'finalized');
+                        $confirmMsg = $openReview
+                            ? 'Er loopt al een review sinds ' . $openReview->started_on->format('d-m-Y') . '. Je gaat verder in die review. Doorgaan?'
+                            : ($lastFinalized
+                                ? 'De vorige review is gefinaliseerd op ' . $lastFinalized->finalized_at?->format('d-m-Y') . '. Toch een nieuwe review starten?'
+                                : 'Een nieuwe review starten voor ' . $resident->display_name . '?');
+                    @endphp
+                    <form method="POST" action="{{ route('reviews.start', $resident) }}"
+                          onsubmit="return confirm(@js($confirmMsg))">
                         @csrf
-                        <button type="submit" class="text-sm text-emerald-700 hover:underline">Nieuwe review starten →</button>
+                        <button type="submit" class="text-sm text-emerald-700 hover:underline">
+                            {{ $openReview ? 'Verder in lopende review →' : 'Nieuwe review starten →' }}
+                        </button>
                     </form>
                 </div>
 

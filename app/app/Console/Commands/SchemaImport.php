@@ -58,6 +58,12 @@ class SchemaImport extends Command
             $this->info("  - {$type}: {$count}");
         }
         $this->info("Unknown CNKs stubbed: " . count($summary['unknown_cnks']));
+        if ($dropped = $summary['dropped_rows'] ?? []) {
+            $this->warn('Regels zonder bruikbare CNK (niet geïmporteerd): ' . count($dropped));
+            foreach ($dropped as $d) {
+                $this->line("  {$d['resident']} — {$d['name']} (CNK \"{$d['cnk']}\")");
+            }
+        }
         return self::SUCCESS;
     }
 }

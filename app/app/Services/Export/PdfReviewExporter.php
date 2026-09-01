@@ -143,7 +143,7 @@ class PdfReviewExporter
             ->margins(15, 15, 15, 15)
             ->showBackground();
 
-        if ($chrome = env('CHROME_PATH')) {
+        if ($chrome = config('chrome.binary')) {
             $shot->setChromePath($chrome);
         }
 

@@ -15,6 +15,9 @@ class MedicationSchedule extends Model
     public const TYPE_PRN = 'prn';
     public const TYPE_FORBIDDEN = 'forbidden';
 
+    /** The three schedule types that count as "currently taken". */
+    public const ACTIVE_TYPES = [self::TYPE_CHRONIC, self::TYPE_TEMP, self::TYPE_PRN];
+
     protected $fillable = [
         'resident_id', 'medication_id', 'schedule_type',
         'start_on', 'end_on', 'frequency', 'unit', 'dosages', 'notes',
@@ -25,6 +28,12 @@ class MedicationSchedule extends Model
         'end_on' => 'date',
         'dosages' => 'array',
     ];
+
+    /** @param  \Illuminate\Database\Eloquent\Builder<self>  $query */
+    public function scopeActive($query)
+    {
+        return $query->whereIn('schedule_type', self::ACTIVE_TYPES);
+    }
 
     public function resident(): BelongsTo
     {

@@ -77,6 +77,7 @@ class MedicationSchemaImporter
         $residentsByKey = $this->groupByResident($rowsBySheet);
 
         $unknownCnks = [];
+        $droppedRows = [];
         $residentsTouched = 0;
         $scheduleCounts = array_fill_keys(array_keys(self::SHEETS), 0);
 
@@ -113,6 +114,14 @@ class MedicationSchemaImporter
                 foreach ($r[$type] as $row) {
                     $cnk = Medication::normalizeCnk((string) ($row['CNK'] ?? ''));
                     if ($cnk === null) {
+                        // Rows with a non-numeric marker instead of a CNK (bv. "MB")
+                        // can't be linked to a product. Report them rather than
+                        // letting them disappear from the schema unnoticed.
+                        $droppedRows[] = [
+                            'resident' => $resident->slug,
+                            'cnk' => trim((string) ($row['CNK'] ?? '')),
+                            'name' => trim((string) ($row['Medicatienaam'] ?? '?')),
+                        ];
                         continue;
                     }
                     $med = Medication::firstOrCreate(
@@ -155,6 +164,7 @@ class MedicationSchemaImporter
                 $unknownCnks,
                 array_keys($unknownCnks),
             ),
+            'dropped_rows' => $droppedRows,
         ];
     }
 
@@ -194,6 +204,7 @@ class MedicationSchemaImporter
                 return false;
             }
         }
+
         return true;
     }
 
@@ -234,13 +245,20 @@ class MedicationSchemaImporter
     {
         if ($type === MedicationSchedule::TYPE_CHRONIC || $type === MedicationSchedule::TYPE_TEMP) {
             $out = [];
-            foreach (self::TIME_SLOTS as $slot) {
+            // Any HH:MM column counts as a time slot; carecenters differ in
+            // their rounds (e.g. 08:00 vs 07:30), so don't hardcode the grid.
+            $slots = array_filter(array_keys($row), fn ($h) => preg_match('/^\d{1,2}:\d{2}$/', (string) $h));
+            if (count($slots) === 0) {
+                $slots = self::TIME_SLOTS;
+            }
+            foreach ($slots as $slot) {
                 $val = $row[$slot] ?? null;
                 if ($val === null || $val === '') {
                     continue;
                 }
                 $out[$slot] = is_numeric($val) ? (float) $val : trim((string) $val);
             }
+            ksort($out);
             return count($out) > 0 ? $out : null;
         }
         if ($type === MedicationSchedule::TYPE_PRN) {

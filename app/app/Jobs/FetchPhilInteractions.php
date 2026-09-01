@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\Resident;
 use App\Models\Review;
 use App\Services\Scraping\PhilScraper;
+use App\Services\Screening\GheopsScreener;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -19,7 +20,7 @@ class FetchPhilInteractions implements ShouldQueue
 
     public function __construct(public int $residentId, public ?int $reviewId = null) {}
 
-    public function handle(PhilScraper $scraper): void
+    public function handle(PhilScraper $scraper, GheopsScreener $screener): void
     {
         $resident = Resident::findOrFail($this->residentId);
 
@@ -41,6 +42,10 @@ class FetchPhilInteractions implements ShouldQueue
                 'status' => Review::STATUS_DRAFT,
             ]);
         }
+
+        // A review born here never went through the "Nieuwe review"-button,
+        // so screen it or it would show up empty in the UI.
+        $screener->ensureScreened($review);
 
         $scraper->fetchForResident($resident, $review);
     }
