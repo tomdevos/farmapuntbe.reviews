@@ -9,6 +9,7 @@ use App\Models\MedicationSchedule;
 use App\Models\Resident;
 use App\Models\Review;
 use App\Models\ReviewFinding;
+use App\Services\NoteLibrary;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -28,6 +29,10 @@ use Illuminate\Support\Facades\DB;
  */
 class GheopsScreener
 {
+    public function __construct(private readonly NoteLibrary $library)
+    {
+    }
+
     /** @var array<string, array<string>>|null */
     private ?array $classMembersByClass = null;
 
@@ -236,14 +241,23 @@ class GheopsScreener
         // note_md and dismissed_at are deliberately left alone.
         if ($existing) {
             $existing->update($attributes);
+            // A refresh also fills in what she wrote about this criterium
+            // before, but only where she has not written anything herself.
+            if ($this->library->suggest($existing)) {
+                $existing->save();
+            }
             return $existing;
         }
 
-        return ReviewFinding::create($attributes + [
+        $finding = ReviewFinding::make($attributes + [
             'review_id' => $review->id,
             'source' => ReviewFinding::SOURCE_GHEOPS,
             'gheops_criterion_id' => $criterion->id,
         ]);
+        $this->library->suggest($finding);
+        $finding->save();
+
+        return $finding;
     }
 
     /**

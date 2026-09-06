@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('uploads.create')" :active="request()->routeIs('uploads.*')">
                         Upload schema
                     </x-nav-link>
+                    <x-nav-link :href="route('note-templates.index')" :active="request()->routeIs('note-templates.*')">
+                        Uitleg
+                    </x-nav-link>
                     <x-nav-link :href="route('exports.create')" :active="request()->routeIs('exports.*')">
                         Export
                     </x-nav-link>

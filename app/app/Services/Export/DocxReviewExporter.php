@@ -17,6 +17,10 @@ class DocxReviewExporter
 {
     private const FARMAPUNT_GREEN = '3CA84B';
 
+    public function __construct(private readonly FindingPresenter $presenter)
+    {
+    }
+
     public function exportResident(Resident $resident, ?Review $review = null, ?int $userId = null): ReviewExport
     {
         $resident->loadMissing('department.careCenter');
@@ -146,17 +150,12 @@ class DocxReviewExporter
             $header->addText('   ', []);
             $header->addText('Behandelend arts: ' . ($resident->doctor_name ?: '—'), ['italic' => true, 'color' => self::FARMAPUNT_GREEN, 'size' => 9]);
 
-            if ($rev && $rev->findings->whereNull('dismissed_at')->isNotEmpty()) {
-                foreach ($rev->findings->whereNull('dismissed_at') as $f) {
-                    $p = $section->addTextRun();
-                    $p->addText(\Illuminate\Support\Str::beforeLast($f->title, ':') . ': ', ['bold' => true, 'color' => self::FARMAPUNT_GREEN]);
-                    $rest = trim(\Illuminate\Support\Str::after($f->title, ':'));
-                    if ($rest !== '') $p->addText($rest);
-                    if ($f->body_md) {
-                        $section->addText($f->body_md, ['size' => 9, 'color' => '555555']);
-                    }
-                    if ($f->note_md) {
-                        $section->addText($f->note_md, ['size' => 9, 'italic' => true, 'color' => self::FARMAPUNT_GREEN]);
+            $lines = $rev ? $this->presenter->present($rev->findings) : [];
+            if ($lines !== []) {
+                foreach ($lines as $line) {
+                    $section->addText($line['label'] . ':', ['bold' => true, 'color' => self::FARMAPUNT_GREEN]);
+                    foreach ($line['lines'] as $text) {
+                        $section->addText($text, ['size' => 9, 'color' => '555555']);
                     }
                 }
             } else {

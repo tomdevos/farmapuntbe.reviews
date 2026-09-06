@@ -156,7 +156,7 @@
                     <div id="gheops" class="bg-white dark:bg-gray-800 shadow rounded-lg scroll-mt-4">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
                             <div>
-                                <h3 class="font-semibold">GheOP³S-bevindingen ({{ $gheopsFindings->count() }})</h3>
+                                <h3 class="font-semibold">GheOP³S-bevindingen ({{ $gheopsFindings->count() }}) <x-suggestion-count :findings="$gheopsFindings" /></h3>
                                 <p class="text-xs text-gray-500">
                                     @if ($review->gheops_screened_at)
                                         Gescreend op {{ $review->gheops_screened_at->format('d-m-Y H:i') }}.
@@ -202,7 +202,7 @@
 
                     <div id="phil" class="bg-white dark:bg-gray-800 shadow rounded-lg scroll-mt-4">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
-                            <h3 class="font-semibold">Phil-interacties ({{ $philFindings->count() }})</h3>
+                            <h3 class="font-semibold">Phil-interacties ({{ $philFindings->count() }}) <x-suggestion-count :findings="$philFindings" /></h3>
                             <form method="POST" action="{{ route('reviews.refresh-phil', $review) }}">
                                 @csrf
                                 <button class="text-sm text-emerald-700 hover:underline" {{ $philStatus['has_jobs'] ? 'disabled' : '' }}>
@@ -294,14 +294,21 @@
 
                     <div id="observaties" class="bg-white dark:bg-gray-800 shadow rounded-lg scroll-mt-4">
                         <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-                            <h3 class="font-semibold">Manuele observaties ({{ $manualFindings->count() }})</h3>
+                            <h3 class="font-semibold">Manuele observaties ({{ $manualFindings->count() }}) <x-suggestion-count :findings="$manualFindings" /></h3>
                         </div>
                         <ul class="divide-y divide-gray-200 dark:divide-gray-700">
                             @forelse ($manualFindings as $f)
                                 <li id="finding-{{ $f->id }}" class="px-6 py-3 scroll-mt-4">
                                     <div class="flex items-start justify-between gap-3">
                                         <div class="text-sm">
-                                            <div class="font-medium">{{ $f->title }}</div>
+                                            <div class="font-medium">
+                                                {{ $f->title }}
+                                                @if ($f->note_suggested_at)
+                                                    <span class="ml-1 px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 text-[10px] font-normal">
+                                                        voorstel uit eerdere review — nakijken
+                                                    </span>
+                                                @endif
+                                            </div>
                                             @if ($f->body_md)<div class="text-gray-600 dark:text-gray-300 mt-1 whitespace-pre-line">{{ $f->body_md }}</div>@endif
                                         </div>
                                         <form method="POST" action="{{ route('reviews.findings.destroy', [$review, $f]) }}"
@@ -326,10 +333,38 @@
                         </ul>
                         <form method="POST" action="{{ route('reviews.findings.store', $review) }}" class="px-6 py-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
                             @csrf
-                            <input type="text" name="title" required placeholder="Bv. 'Waarom 2× per dag Atorvastatine 20mg?'" value="{{ old('title') }}" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">
-                            <textarea name="body_md" placeholder="Toelichting (markdown)" rows="2" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">{{ old('body_md') }}</textarea>
+                            <input type="text" name="title" required list="observatie-titels" data-observation-title
+                                   placeholder="Bv. 'Waarom 2× per dag Atorvastatine 20mg?'" value="{{ old('title') }}"
+                                   class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">
+                            <datalist id="observatie-titels">
+                                @foreach ($observationTemplates as $t)
+                                    <option value="{{ $t->label }}"></option>
+                                @endforeach
+                            </datalist>
+                            <textarea name="body_md" data-observation-body placeholder="Toelichting (markdown)" rows="2" class="w-full text-sm rounded border-gray-300 dark:border-gray-700 dark:bg-gray-900">{{ old('body_md') }}</textarea>
+                            <p class="text-xs text-gray-500">
+                                Laat de toelichting leeg om de tekst over te nemen die je eerder bij dit product schreef.
+                                <a href="{{ route('note-templates.index') }}" class="text-emerald-700 hover:underline">Uitleg-bibliotheek</a>
+                            </p>
                             <button class="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded text-sm">+ Observatie toevoegen</button>
                         </form>
+
+                        {{-- Kiest ze een bekend product, dan staat haar eerdere zin er
+                             meteen; typt ze zelf iets, dan blijft dat staan. --}}
+                        @push('scripts')
+                            <script>
+                                (function () {
+                                    const texts = @json($observationTemplates->pluck('note_md', 'label'));
+                                    const title = document.querySelector('[data-observation-title]');
+                                    const body = document.querySelector('[data-observation-body]');
+                                    if (!title || !body) return;
+                                    title.addEventListener('input', function () {
+                                        const known = texts[title.value];
+                                        if (known && body.value.trim() === '') body.value = known;
+                                    });
+                                })();
+                            </script>
+                        @endpush
                     </div>
                 </div>
 

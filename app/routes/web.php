@@ -4,6 +4,7 @@ use App\Http\Controllers\CareCenterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\MedicationSchemaUploadController;
+use App\Http\Controllers\NoteTemplateController;
 use App\Http\Controllers\PhilBulkController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ResidentController;
@@ -35,6 +36,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/reviews/{review}/attentions/{attention}', [ReviewController::class, 'destroyAttention'])->name('reviews.attentions.destroy');
     Route::post('/reviews/{review}/finalize', [ReviewController::class, 'finalize'])->name('reviews.finalize');
     Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+
+    Route::get('/uitleg', [NoteTemplateController::class, 'index'])->name('note-templates.index');
+    Route::patch('/uitleg/{noteTemplate}', [NoteTemplateController::class, 'update'])->name('note-templates.update');
+    Route::delete('/uitleg/{noteTemplate}', [NoteTemplateController::class, 'destroy'])->name('note-templates.destroy');
 
     Route::get('/exports/create', [ReviewExportController::class, 'create'])->name('exports.create');
     Route::post('/exports', [ReviewExportController::class, 'store'])->name('exports.store');

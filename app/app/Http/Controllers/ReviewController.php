@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FindingNoteTemplate;
 use App\Models\Resident;
 use App\Models\Review;
 use App\Models\ReviewAttention;
 use App\Models\ReviewFinding;
 use App\Jobs\FetchPhilInteractions;
+use App\Services\NoteLibrary;
 use App\Services\PhilJobStatus;
 use App\Services\Scraping\PhilScraper;
 use App\Services\Screening\GheopsScreener;
@@ -62,6 +64,11 @@ class ReviewController extends Controller
             'forbidden' => $schedules['forbidden'] ?? collect(),
             'philStatus' => $philStatus->for($resident),
             'philSkipped' => PhilScraper::skippedMedications($resident),
+            // Feeds the datalist under "nieuwe observatie": products she has
+            // written about before, with the text she used.
+            'observationTemplates' => FindingNoteTemplate::where('source', ReviewFinding::SOURCE_MANUAL)
+                ->orderBy('label')
+                ->get(['label', 'note_md']),
         ]);
     }
 
@@ -82,7 +89,7 @@ class ReviewController extends Controller
         return back()->withFragment('phil')->with('status', 'Phil-fetch ingepland (queue).');
     }
 
-    public function storeFinding(Request $request, Review $review)
+    public function storeFinding(Request $request, Review $review, NoteLibrary $library)
     {
         $data = $request->validate([
             'title' => 'required|string|max:1000',
@@ -97,10 +104,18 @@ class ReviewController extends Controller
             'position' => ($review->findings()->max('position') ?? 0) + 1,
         ]);
 
+        // Typed her own text: keep it for next time. Left it empty: offer what
+        // she wrote about this product before.
+        if (trim((string) $finding->body_md) !== '') {
+            $library->remember($finding);
+        } elseif ($library->suggest($finding)) {
+            $finding->save();
+        }
+
         return back()->withFragment("finding-{$finding->id}")->with('status', 'Observatie toegevoegd.');
     }
 
-    public function updateFinding(Request $request, Review $review, ReviewFinding $finding)
+    public function updateFinding(Request $request, Review $review, ReviewFinding $finding, NoteLibrary $library)
     {
         abort_unless($finding->review_id === $review->id, 404);
 
@@ -117,7 +132,18 @@ class ReviewController extends Controller
         if (array_key_exists('title', $data)) $finding->title = $data['title'];
         if (array_key_exists('body_md', $data)) $finding->body_md = $data['body_md'];
         if (array_key_exists('note_md', $data)) $finding->note_md = $data['note_md'];
+
+        // Saving the text is the pharmacist's confirmation: the suggestion flag
+        // goes, and her wording becomes the one the library offers next time.
+        $textField = NoteLibrary::field($finding);
+        $textSaved = array_key_exists($textField, $data);
+        if ($textSaved) {
+            $finding->note_suggested_at = null;
+        }
         $finding->save();
+        if ($textSaved) {
+            $library->remember($finding);
+        }
 
         return back()->withFragment("finding-{$finding->id}");
     }

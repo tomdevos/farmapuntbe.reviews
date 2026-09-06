@@ -9,6 +9,7 @@ use App\Models\PhilInteraction;
 use App\Models\Resident;
 use App\Models\Review;
 use App\Models\ReviewFinding;
+use App\Services\NoteLibrary;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 use Illuminate\Support\Facades\Log;
@@ -35,6 +36,10 @@ class PhilScraper
     private const BASE = 'https://phil.apb.be';
     private const SSO_URL = 'https://sso.apb.be/LogonFlow/Logon?appname=&culture=nl-BE&urlredirect=https%3A%2F%2Fsso.apb.be%2FMoreInformation%2Fphil%3Ffrom%3Dhttp%253A%252F%252Fphil.apb.be%252F%26Culture%3DNL-BE';
     private const SEVERITIES = ['Ernstig' => 'ernstig', 'Matig ernstig' => 'matig', 'Gering' => 'gering'];
+
+    public function __construct(private readonly NoteLibrary $library)
+    {
+    }
 
     public function fetchForResident(Resident $resident, ?Review $review = null): PhilInteraction
     {
@@ -594,10 +599,15 @@ class PhilScraper
                     'title' => $title,
                     'fingerprint' => $fingerprint,
                 ]);
+                // A re-fetch also fills in the sentence she wrote about this
+                // pair before, but never overwrites her own uitleg.
+                if ($this->library->suggest($current)) {
+                    $current->save();
+                }
                 continue;
             }
 
-            ReviewFinding::create([
+            $finding = ReviewFinding::make([
                 'review_id' => $review->id,
                 'source' => ReviewFinding::SOURCE_PHIL,
                 'severity' => $f->severity,
@@ -606,6 +616,8 @@ class PhilScraper
                 'fingerprint' => $fingerprint,
                 'position' => ++$position,
             ]);
+            $this->library->suggest($finding);
+            $finding->save();
         }
 
         // Interactions Phil no longer reports (or leftovers from before
