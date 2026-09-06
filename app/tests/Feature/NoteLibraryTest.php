@@ -142,6 +142,27 @@ class NoteLibraryTest extends TestCase
         $this->assertSame(1, FindingNoteTemplate::firstOrFail()->times_used);
     }
 
+    public function test_a_long_observation_title_still_fits_the_key_column(): void
+    {
+        $library = app(NoteLibrary::class);
+        $title = 'Sommige geneesmiddelen kunnen inwerken op de suikerverlagende werking van Jardiance.';
+        $review = $this->reviewFor('een');
+        $finding = ReviewFinding::create([
+            'review_id' => $review->id, 'source' => ReviewFinding::SOURCE_MANUAL,
+            'title' => $title, 'body_md' => 'Bloedglucose en HbA1c regelmatig controleren.', 'position' => 1,
+        ]);
+
+        $this->assertLessThanOrEqual(64, strlen((string) $library->keyFor($finding)));
+        $this->assertNotNull($library->remember($finding));
+
+        // En dezelfde observatie bij een andere bewoner vindt hem terug.
+        $second = ReviewFinding::create([
+            'review_id' => $this->reviewFor('twee')->id, 'source' => ReviewFinding::SOURCE_MANUAL,
+            'title' => $title, 'position' => 1,
+        ]);
+        $this->assertTrue($library->suggest($second));
+    }
+
     public function test_the_library_page_lists_and_removes_a_sentence(): void
     {
         $template = FindingNoteTemplate::create([

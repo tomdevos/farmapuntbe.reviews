@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\FindingNoteTemplate;
 use App\Models\ReviewFinding;
 use App\Services\NoteLibrary;
 use Illuminate\Console\Command;
@@ -13,12 +14,18 @@ use Illuminate\Console\Command;
  */
 class NoteLibraryRebuild extends Command
 {
-    protected $signature = 'review:notes-rebuild';
+    protected $signature = 'review:notes-rebuild {--fresh : wis de bibliotheek eerst}';
 
     protected $description = 'Bouw de uitleg-bibliotheek op uit de uitleg die al in reviews staat';
 
     public function handle(NoteLibrary $library): int
     {
+        // Alles hier is afgeleid uit de reviews zelf. --fresh gooit dus niets
+        // onherstelbaars weg, behalve zinnen die enkel in /uitleg bewerkt zijn.
+        if ($this->option('fresh')) {
+            FindingNoteTemplate::query()->delete();
+        }
+
         /** @var array<string, array{finding: ReviewFinding, count: int}> $perKey */
         $perKey = [];
 

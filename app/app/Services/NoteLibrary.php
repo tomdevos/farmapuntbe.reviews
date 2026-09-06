@@ -54,8 +54,10 @@ class NoteLibrary
             return ($food ? 'philfood:' : 'phil:') . sha1(implode('|', $sides));
         }
 
+        // Gehasht, niet leesbaar: een observatietitel is vaak een hele zin en
+        // paste zo niet in de key-kolom. De leesbare vorm staat in `label`.
         $slug = Slug::make(str_contains($title, ':') ? Str::before($title, ':') : $title);
-        return $slug === '' ? null : 'manual:' . $slug;
+        return $slug === '' ? null : 'manual:' . sha1($slug);
     }
 
     /**
