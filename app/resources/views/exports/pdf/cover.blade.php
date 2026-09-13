@@ -13,6 +13,7 @@
             <tr><td class="label">Opgesteld door</td><td>{{ $metadata['opgesteld_door'] }}</td></tr>
             <tr><td class="label">Datum</td><td>{{ $metadata['datum'] }}</td></tr>
             <tr><td class="label">Onderwerp</td><td>{{ $metadata['onderwerp'] }}</td></tr>
+            <tr><td class="label">Indeling</td><td>{{ $metadata['indeling'] }}</td></tr>
         </table>
 
         <p style="margin-top:30mm; font-size:8pt; color:#888;">

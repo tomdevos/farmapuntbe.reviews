@@ -8,6 +8,7 @@ use App\Models\Resident;
 use App\Models\Review;
 use App\Models\ReviewFinding;
 use App\Services\Export\DocxReviewExporter;
+use App\Services\Export\ResidentGrouping;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -48,6 +49,51 @@ class DocxExportTest extends TestCase
         $run = $this->runContaining($xml, 'controle bloedglucose');
         $this->assertStringNotContainsString('<w:i/>', $run);
         $this->assertStringContainsString('555555', $run);
+    }
+
+    public function test_per_doctor_puts_every_doctor_in_one_block_with_the_department_per_resident(): void
+    {
+        $careCenter = CareCenter::create(['name' => 'WZC Test', 'slug' => 'wzc-test']);
+        $marga = Department::create(['care_center_id' => $careCenter->id, 'name' => 'Marga', 'slug' => 'marga']);
+        $zonne = Department::create(['care_center_id' => $careCenter->id, 'name' => 'Zonnebloem', 'slug' => 'zonnebloem']);
+
+        $this->residentWithReview($marga, 'Joanna', 'De Groef', 'Dr. Aerts');
+        $this->residentWithReview($zonne, 'Frans', 'Willems', 'Dr. Aerts');
+        $this->residentWithReview($marga, 'Maria', 'Peeters', 'Dr. Janssens');
+
+        $export = app(DocxReviewExporter::class)
+            ->exportCareCenter($careCenter, null, ResidentGrouping::SORT_DOCTOR);
+        $file = storage_path('app/private/' . $export->path);
+        $xml = $this->documentXml($file);
+        @unlink($file);
+
+        // Eén blok per arts — niet één per afdeling.
+        $this->assertSame(1, substr_count($xml, 'Dr. Aerts'));
+        $this->assertSame(1, substr_count($xml, 'Dr. Janssens'));
+        $this->assertStringNotContainsString('Afdeling Marga', $xml);
+
+        // Dr. Aerts krijgt zijn twee bewoners, elk met hun afdeling in de kopregel.
+        $this->assertStringContainsString('Afdeling: Marga', $xml);
+        $this->assertStringContainsString('Afdeling: Zonnebloem', $xml);
+        $this->assertStringContainsString('Gegroepeerd per behandelend arts', $xml);
+    }
+
+    private function residentWithReview(Department $department, string $first, string $last, string $doctor): Resident
+    {
+        $resident = Resident::create([
+            'department_id' => $department->id,
+            'first_name' => $first,
+            'last_name' => $last,
+            'slug' => \Illuminate\Support\Str::slug("{$first} {$last}"),
+            'doctor_name' => $doctor,
+        ]);
+        Review::create([
+            'resident_id' => $resident->id,
+            'started_on' => now()->toDateString(),
+            'status' => Review::STATUS_DRAFT,
+        ]);
+
+        return $resident;
     }
 
     private function documentXml(string $file): string

@@ -67,6 +67,26 @@
                     </div>
 
                     <div>
+                        <label class="block text-sm font-medium mb-2">Volgorde</label>
+                        <div class="grid grid-cols-2 gap-2 text-sm"
+                             x-data="{ sort: '{{ old('sort', \App\Services\Export\ResidentGrouping::SORT_ALPHABETICAL) }}' }">
+                            @foreach ([
+                                \App\Services\Export\ResidentGrouping::SORT_ALPHABETICAL => ['Alfabetisch', 'Per afdeling, bewoners op naam'],
+                                \App\Services\Export\ResidentGrouping::SORT_DOCTOR => ['Per arts', 'Eén blok per behandelend arts'],
+                            ] as $key => [$label, $hint])
+                                <label class="border rounded p-3 cursor-pointer flex items-start gap-2"
+                                       :class="sort === '{{ $key }}' ? 'border-emerald-600 bg-emerald-50 text-emerald-800' : 'border-gray-300'">
+                                    <input type="radio" name="sort" value="{{ $key }}" x-model="sort" class="mt-0.5 text-emerald-600">
+                                    <span>
+                                        <span class="block font-medium">{{ $label }}</span>
+                                        <span class="block text-xs text-gray-500">{{ $hint }}</span>
+                                    </span>
+                                </label>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div>
                         <label class="block text-sm font-medium mb-2">Format</label>
                         <div class="flex gap-4 text-sm">
                             <label class="flex items-center gap-2">

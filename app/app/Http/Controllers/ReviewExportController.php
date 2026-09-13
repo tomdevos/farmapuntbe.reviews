@@ -8,6 +8,7 @@ use App\Models\Resident;
 use App\Models\ReviewExport;
 use App\Services\Export\DocxReviewExporter;
 use App\Services\Export\PdfReviewExporter;
+use App\Services\Export\ResidentGrouping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -32,6 +33,7 @@ class ReviewExportController extends Controller
             'dept' => 'nullable|integer|exists:departments,id',
             'res' => 'nullable|integer|exists:residents,id',
             'format' => 'required|in:pdf,docx',
+            'sort' => 'nullable|in:' . implode(',', ResidentGrouping::SORTS),
         ]);
 
         // Server-side scope→id resolution so the form doesn't depend on JS.
@@ -47,15 +49,16 @@ class ReviewExportController extends Controller
                 ->withErrors([$scopeIdField => 'Selecteer een ' . $data['scope'] . '.']);
         }
 
+        $sort = $data['sort'] ?? ResidentGrouping::SORT_ALPHABETICAL;
         $userId = $request->user()?->id;
         try {
             $export = match ([$data['scope'], $data['format']]) {
-                ['resident', 'pdf'] => $pdf->exportResident(Resident::findOrFail($scopeId), null, $userId),
-                ['department', 'pdf'] => $pdf->exportDepartment(Department::findOrFail($scopeId), $userId),
-                ['care_center', 'pdf'] => $pdf->exportCareCenter(CareCenter::findOrFail($scopeId), $userId),
-                ['resident', 'docx'] => $docx->exportResident(Resident::findOrFail($scopeId), null, $userId),
-                ['department', 'docx'] => $docx->exportDepartment(Department::findOrFail($scopeId), $userId),
-                ['care_center', 'docx'] => $docx->exportCareCenter(CareCenter::findOrFail($scopeId), $userId),
+                ['resident', 'pdf'] => $pdf->exportResident(Resident::findOrFail($scopeId), null, $userId, $sort),
+                ['department', 'pdf'] => $pdf->exportDepartment(Department::findOrFail($scopeId), $userId, $sort),
+                ['care_center', 'pdf'] => $pdf->exportCareCenter(CareCenter::findOrFail($scopeId), $userId, $sort),
+                ['resident', 'docx'] => $docx->exportResident(Resident::findOrFail($scopeId), null, $userId, $sort),
+                ['department', 'docx'] => $docx->exportDepartment(Department::findOrFail($scopeId), $userId, $sort),
+                ['care_center', 'docx'] => $docx->exportCareCenter(CareCenter::findOrFail($scopeId), $userId, $sort),
             };
         } catch (\Throwable $e) {
             return back()->withInput()->withErrors(['export' => 'Export mislukt: ' . $e->getMessage()]);

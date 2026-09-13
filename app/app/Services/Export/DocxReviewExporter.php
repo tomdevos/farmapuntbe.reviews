@@ -17,47 +17,51 @@ class DocxReviewExporter
 {
     private const FARMAPUNT_GREEN = '3CA84B';
 
-    public function __construct(private readonly FindingPresenter $presenter)
-    {
+    public function __construct(
+        private readonly FindingPresenter $presenter,
+        private readonly ResidentGrouping $grouping,
+    ) {
     }
 
-    public function exportResident(Resident $resident, ?Review $review = null, ?int $userId = null): ReviewExport
+    public function exportResident(Resident $resident, ?Review $review = null, ?int $userId = null, string $sort = ResidentGrouping::SORT_ALPHABETICAL): ReviewExport
     {
         $resident->loadMissing('department.careCenter');
         $review = $review ?? $resident->reviews()->latest('started_on')->first();
         if (! $review) {
             throw new \RuntimeException('Geen review gevonden voor deze bewoner.');
         }
-        $word = $this->makeDocument($resident->department->careCenter, $review);
-        $this->addDepartmentSection(
+        $word = $this->makeDocument($resident->department->careCenter, $sort, $review);
+        $this->addGroups(
             $word,
-            $resident->department,
-            collect([$resident]),
+            $this->grouping->groups(collect([$resident]), $sort),
             collect([$resident->id => $review->load('findings', 'attentions')]),
         );
 
-        $path = $this->save($word, "resident-{$resident->slug}-{$review->started_on->format('Ymd')}.docx");
+        $path = $this->save($word, "resident-{$resident->slug}-{$review->started_on->format('Ymd')}" . $this->sortSuffix($sort) . ".docx");
         return $this->record(ReviewExport::SCOPE_RESIDENT, $resident->id, $path, $userId);
     }
 
-    public function exportDepartment(Department $department, ?int $userId = null): ReviewExport
+    public function exportDepartment(Department $department, ?int $userId = null, string $sort = ResidentGrouping::SORT_ALPHABETICAL): ReviewExport
     {
         $department->loadMissing(['careCenter', 'residents' => fn ($q) => $q->whereNull('archived_at')->orderBy('last_name')]);
+        $department->residents->each->setRelation('department', $department);
         $reviews = $this->latestReviews($department->residents);
-        $word = $this->makeDocument($department->careCenter);
-        $this->addDepartmentSection($word, $department, $department->residents, $reviews);
+        $word = $this->makeDocument($department->careCenter, $sort);
+        $this->addGroups($word, $this->grouping->groups($department->residents, $sort), $reviews);
 
-        $path = $this->save($word, "department-{$department->slug}-" . now()->format('Ymd') . '.docx');
+        $path = $this->save($word, "department-{$department->slug}-" . now()->format('Ymd') . $this->sortSuffix($sort) . '.docx');
         return $this->record(ReviewExport::SCOPE_DEPARTMENT, $department->id, $path, $userId);
     }
 
-    public function exportCareCenter(CareCenter $careCenter, ?int $userId = null): ReviewExport
+    public function exportCareCenter(CareCenter $careCenter, ?int $userId = null, string $sort = ResidentGrouping::SORT_ALPHABETICAL): ReviewExport
     {
         $careCenter->loadMissing(['departments.residents' => fn ($q) => $q->whereNull('archived_at')->orderBy('last_name')]);
-        $allResidents = $careCenter->departments->flatMap->residents;
+        $allResidents = $careCenter->departments->flatMap(
+            fn ($d) => $d->residents->each->setRelation('department', $d)
+        );
         $reviews = $this->latestReviews($allResidents);
 
-        $word = $this->makeDocument($careCenter);
+        $word = $this->makeDocument($careCenter, $sort);
         $this->addVoorwoord($word, $careCenter);
 
         $attentions = $reviews->flatMap->attentions->unique('label');
@@ -65,15 +69,13 @@ class DocxReviewExporter
             $this->addAttentions($word, $attentions);
         }
 
-        foreach ($careCenter->departments as $dept) {
-            $this->addDepartmentSection($word, $dept, $dept->residents, $reviews);
-        }
+        $this->addGroups($word, $this->grouping->groups($allResidents, $sort), $reviews);
 
-        $path = $this->save($word, "wzc-{$careCenter->slug}-" . now()->format('Ymd') . '.docx');
+        $path = $this->save($word, "wzc-{$careCenter->slug}-" . now()->format('Ymd') . $this->sortSuffix($sort) . '.docx');
         return $this->record(ReviewExport::SCOPE_CARE_CENTER, $careCenter->id, $path, $userId);
     }
 
-    private function makeDocument(CareCenter $cc, ?Review $review = null): PhpWord
+    private function makeDocument(CareCenter $cc, string $sort, ?Review $review = null): PhpWord
     {
         $word = new PhpWord();
         $word->setDefaultFontName('Lato');
@@ -93,6 +95,9 @@ class DocxReviewExporter
             ['Opgesteld door', $review?->user?->name ?? 'Apotheker Farmapunt'],
             ['Datum', ($review?->started_on ?? now())->translatedFormat('j F Y')],
             ['Onderwerp', 'Periodieke medicatiereview'],
+            ['Indeling', $sort === ResidentGrouping::SORT_DOCTOR
+                ? 'Gegroepeerd per behandelend arts'
+                : 'Alfabetisch per afdeling'],
         ];
         $table = $section->addTable(['borderSize' => 0, 'cellMargin' => 80]);
         foreach ($rows as [$label, $value]) {
@@ -135,10 +140,20 @@ class DocxReviewExporter
         }
     }
 
-    private function addDepartmentSection(PhpWord $word, Department $dept, Collection $residents, Collection $reviews): void
+    private function addGroups(PhpWord $word, Collection $groups, Collection $reviews): void
     {
+        foreach ($groups as $group) {
+            $this->addGroupSection($word, $group, $reviews);
+        }
+    }
+
+    /** @param array{label: string, residents: Collection, show_department: bool} $group */
+    private function addGroupSection(PhpWord $word, array $group, Collection $reviews): void
+    {
+        $residents = $group['residents'];
+
         $section = $word->addSection();
-        $section->addText("Afdeling {$dept->name}", ['bold' => true, 'size' => 16, 'color' => '2f3a2e']);
+        $section->addText($group['label'], ['bold' => true, 'size' => 16, 'color' => '2f3a2e']);
         $section->addText("{$residents->count()} bewoners", ['italic' => true, 'size' => 9, 'color' => '888888']);
         $section->addTextBreak(1);
 
@@ -148,7 +163,12 @@ class DocxReviewExporter
             $header->addText(($idx + 1) . '. ', ['bold' => true]);
             $header->addText($resident->display_name, ['bold' => true]);
             $header->addText('   ', []);
-            $header->addText('Behandelend arts: ' . ($resident->doctor_name ?: '—'), ['italic' => true, 'color' => self::FARMAPUNT_GREEN, 'size' => 9]);
+            $header->addText(
+                $group['show_department']
+                    ? 'Afdeling: ' . ($resident->department?->name ?: '—')
+                    : 'Behandelend arts: ' . ($resident->doctor_name ?: '—'),
+                ['italic' => true, 'color' => self::FARMAPUNT_GREEN, 'size' => 9],
+            );
 
             $lines = $rev ? $this->presenter->present($rev->findings) : [];
             if ($lines !== []) {
@@ -163,6 +183,12 @@ class DocxReviewExporter
             }
             $section->addTextBreak(1);
         }
+    }
+
+    /** Houdt de twee indelingen van dezelfde dag uit elkaars bestandsnaam. */
+    private function sortSuffix(string $sort): string
+    {
+        return $sort === ResidentGrouping::SORT_DOCTOR ? '-per-arts' : '';
     }
 
     private function latestReviews(Collection $residents): Collection

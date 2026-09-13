@@ -1,15 +1,19 @@
-<h1 class="dept-title">Afdeling {{ $department->name }}</h1>
-<p class="dept-meta">{{ $department->residents->count() }} bewoners</p>
+<h1 class="dept-title">{{ $group['label'] }}</h1>
+<p class="dept-meta">{{ $group['residents']->count() }} bewoners</p>
 
 @php($presenter = app(\App\Services\Export\FindingPresenter::class))
 
-@foreach ($department->residents as $idx => $resident)
+@foreach ($group['residents'] as $idx => $resident)
     @php($rev = $reviewsByResident->get($resident->id))
     @php($lines = $rev ? $presenter->present($rev->findings) : [])
     <div class="resident">
         <div class="header">
             <div><span class="num">{{ $idx + 1 }}.</span> <span class="name">{{ $resident->display_name }}</span></div>
-            <div class="doctor">Behandelend arts: {{ $resident->doctor_name ?: '—' }}</div>
+            @if ($group['show_department'])
+                <div class="doctor">Afdeling: {{ $resident->department?->name ?: '—' }}</div>
+            @else
+                <div class="doctor">Behandelend arts: {{ $resident->doctor_name ?: '—' }}</div>
+            @endif
         </div>
         <div class="body">
             @forelse ($lines as $line)

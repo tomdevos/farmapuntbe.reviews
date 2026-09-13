@@ -49,7 +49,7 @@
 <div class="page-break"></div>
 
 @if ($includeVoorwoord)
-    @include('exports.pdf.toc', ['departments' => $departments])
+    @include('exports.pdf.toc', ['groups' => $groups])
     <div class="page-break"></div>
     @include('exports.pdf.voorwoord')
     <div class="page-break"></div>
@@ -60,9 +60,9 @@
     <div class="page-break"></div>
 @endif
 
-@foreach ($departments as $i => $dept)
-    @include('exports.pdf.department', [
-        'department' => $dept,
+@foreach ($groups as $group)
+    @include('exports.pdf.group', [
+        'group' => $group,
         'reviewsByResident' => $reviewsByResident,
     ])
     @if (! $loop->last)<div class="page-break"></div>@endif

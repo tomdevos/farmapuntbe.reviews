@@ -12,8 +12,13 @@ use Spatie\Browsershot\Browsershot;
 
 class PdfReviewExporter
 {
-    public function exportResident(Resident $resident, ?Review $review = null, ?int $userId = null): ReviewExport
+    public function __construct(private readonly ResidentGrouping $grouping)
     {
+    }
+
+    public function exportResident(Resident $resident, ?Review $review = null, ?int $userId = null, string $sort = ResidentGrouping::SORT_ALPHABETICAL): ReviewExport
+    {
+        $resident->loadMissing('department.careCenter');
         $review = $review ?? $resident->reviews()->latest('started_on')->first();
         if ($review === null) {
             throw new \RuntimeException('Geen review gevonden voor deze bewoner.');
@@ -21,15 +26,15 @@ class PdfReviewExporter
         $html = view('exports.pdf.document', [
             'scope' => 'resident',
             'careCenter' => $resident->department->careCenter,
-            'departments' => collect([$resident->department->setRelation('residents', collect([$resident]))]),
+            'groups' => $this->grouping->groups(collect([$resident]), $sort),
             'reviewsByResident' => collect([$resident->id => $review->load('findings.activeIngredient', 'findings.gheopsCriterion', 'attentions')]),
             'attentions' => $review->attentions,
-            'metadata' => $this->metadataFor($resident->department->careCenter, $review),
+            'metadata' => $this->metadataFor($resident->department->careCenter, $sort, $review),
             'includeVoorwoord' => false,
             'includeAttentions' => false,
         ])->render();
 
-        $path = $this->renderPdf($html, "resident-{$resident->slug}-{$review->started_on->format('Ymd')}.pdf");
+        $path = $this->renderPdf($html, "resident-{$resident->slug}-{$review->started_on->format('Ymd')}" . $this->sortSuffix($sort) . ".pdf");
 
         return ReviewExport::create([
             'scope' => ReviewExport::SCOPE_RESIDENT,
@@ -41,9 +46,10 @@ class PdfReviewExporter
         ]);
     }
 
-    public function exportDepartment(Department $department, ?int $userId = null): ReviewExport
+    public function exportDepartment(Department $department, ?int $userId = null, string $sort = ResidentGrouping::SORT_ALPHABETICAL): ReviewExport
     {
         $department->loadMissing(['careCenter', 'residents' => fn ($q) => $q->whereNull('archived_at')->orderBy('last_name')]);
+        $department->residents->each->setRelation('department', $department);
         $reviewsByResident = $this->latestReviewsForResidents($department->residents);
 
         $allAttentions = $reviewsByResident->flatMap->attentions;
@@ -51,15 +57,15 @@ class PdfReviewExporter
         $html = view('exports.pdf.document', [
             'scope' => 'department',
             'careCenter' => $department->careCenter,
-            'departments' => collect([$department]),
+            'groups' => $this->grouping->groups($department->residents, $sort),
             'reviewsByResident' => $reviewsByResident,
             'attentions' => $allAttentions,
-            'metadata' => $this->metadataFor($department->careCenter),
+            'metadata' => $this->metadataFor($department->careCenter, $sort),
             'includeVoorwoord' => false,
             'includeAttentions' => $allAttentions->isNotEmpty(),
         ])->render();
 
-        $path = $this->renderPdf($html, "department-{$department->slug}-" . now()->format('Ymd') . '.pdf');
+        $path = $this->renderPdf($html, "department-{$department->slug}-" . now()->format('Ymd') . $this->sortSuffix($sort) . '.pdf');
 
         return ReviewExport::create([
             'scope' => ReviewExport::SCOPE_DEPARTMENT,
@@ -71,26 +77,28 @@ class PdfReviewExporter
         ]);
     }
 
-    public function exportCareCenter(CareCenter $careCenter, ?int $userId = null): ReviewExport
+    public function exportCareCenter(CareCenter $careCenter, ?int $userId = null, string $sort = ResidentGrouping::SORT_ALPHABETICAL): ReviewExport
     {
         $careCenter->loadMissing(['departments.residents' => fn ($q) => $q->whereNull('archived_at')->orderBy('last_name')]);
 
-        $allResidents = $careCenter->departments->flatMap->residents;
+        $allResidents = $careCenter->departments->flatMap(
+            fn ($d) => $d->residents->each->setRelation('department', $d)
+        );
         $reviewsByResident = $this->latestReviewsForResidents($allResidents);
         $allAttentions = $reviewsByResident->flatMap->attentions;
 
         $html = view('exports.pdf.document', [
             'scope' => 'care_center',
             'careCenter' => $careCenter,
-            'departments' => $careCenter->departments,
+            'groups' => $this->grouping->groups($allResidents, $sort),
             'reviewsByResident' => $reviewsByResident,
             'attentions' => $allAttentions,
-            'metadata' => $this->metadataFor($careCenter),
+            'metadata' => $this->metadataFor($careCenter, $sort),
             'includeVoorwoord' => true,
             'includeAttentions' => true,
         ])->render();
 
-        $path = $this->renderPdf($html, "wzc-{$careCenter->slug}-" . now()->format('Ymd') . '.pdf');
+        $path = $this->renderPdf($html, "wzc-{$careCenter->slug}-" . now()->format('Ymd') . $this->sortSuffix($sort) . '.pdf');
 
         return ReviewExport::create([
             'scope' => ReviewExport::SCOPE_CARE_CENTER,
@@ -102,6 +110,12 @@ class PdfReviewExporter
         ]);
     }
 
+    /** Houdt de twee indelingen van dezelfde dag uit elkaars bestandsnaam. */
+    private function sortSuffix(string $sort): string
+    {
+        return $sort === ResidentGrouping::SORT_DOCTOR ? '-per-arts' : '';
+    }
+
     private function latestReviewsForResidents(Collection $residents): Collection
     {
         return $residents
@@ -110,7 +124,7 @@ class PdfReviewExporter
             ->keyBy('resident_id');
     }
 
-    private function metadataFor(CareCenter $cc, ?Review $review = null): array
+    private function metadataFor(CareCenter $cc, string $sort, ?Review $review = null): array
     {
         return [
             'title' => 'Bespreking medicatieschema\'s',
@@ -121,10 +135,13 @@ class PdfReviewExporter
             'opgesteld_door' => $review?->user?->name ?? 'Apotheker Farmapunt',
             'datum' => ($review?->started_on ?? now())->translatedFormat('j F Y'),
             'onderwerp' => 'Periodieke medicatiereview',
+            'indeling' => $sort === ResidentGrouping::SORT_DOCTOR
+                ? 'Gegroepeerd per behandelend arts'
+                : 'Alfabetisch per afdeling',
         ];
     }
 
-    private function renderPdf(string $html, string $filename): string
+    protected function renderPdf(string $html, string $filename): string
     {
         $dir = storage_path('app/private/exports');
         if (! is_dir($dir)) {
